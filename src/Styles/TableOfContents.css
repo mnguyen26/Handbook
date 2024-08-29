@@ -2,3 +2,24 @@
     display: flex;
     justify-content: flex-start;
   }
+
+.handbook-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.handbook-logo {
+    width: 5%; 
+    max-width: 100px; 
+    min-width: 40px;
+    height: auto;
+}

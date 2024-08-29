@@ -3,16 +3,18 @@ import { NEUTRAL_CHILDREN } from './Neutral';
 import { TOP_CHILDREN } from './Top';
 import { BOTTOM_CHILDREN } from './Bottom';
 
-export interface TOCnode {
-    id: string
-    label: string
+export interface TOCnode extends TreeViewBaseItem {
     // tags: string[]
     children: TOCnode[]
-    // isExpanded: boolean
 }
 
 // export const TABLEOFCONTENTS_TREEITEMS: TreeViewBaseItem[] = [
     export const TABLEOFCONTENTS_TREEITEMS: TOCnode[] = [
+    {
+        id: 'about',
+        label: 'About',
+        children: []
+    },
     {
         id: 'neutral',
         label: 'Neutral',
