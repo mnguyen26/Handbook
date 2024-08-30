@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { modalContentMap } from './modalContentMap';
+import './Styles/Pages.css';
 
 interface DynamicModalProps {
     isOpen: boolean;
@@ -31,7 +32,9 @@ const DynamicModal = (props: DynamicModalProps) => {
                 boxShadow: 24,
                 p: 4,
             }}>
+            <div className='modal-content'>
                 <ModalContent />
+            </div>
             </Box>
         </Modal>
     );
