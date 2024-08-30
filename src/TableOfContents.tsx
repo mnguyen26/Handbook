@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
 import handbookLogo from './Images/HandbookLogo.jpg'
+import DynamicModal from './DynamicModal';
+import { modalContentMap } from './modalContentMap';
 import './Styles/TableOfContents.css';
 
 //========================================================================================================
@@ -72,6 +74,7 @@ interface TreeItemsProps {
     items: TOCnode[];
     expanded: string[];
     onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
+    onNodeSelect: (event: React.SyntheticEvent, nodeId: string) => void;
 }
 
 //========================================================================================================
@@ -103,7 +106,8 @@ const TreeItems = (props: TreeItemsProps) => {
             <RichTreeView 
             items={props.items} 
             expandedItems={props.expanded} 
-            onExpandedItemsChange={props.onExpandedItemsChange}
+            onExpandedItemsChange={props.onExpandedItemsChange} 
+            onItemClick={props.onNodeSelect}
             />
         </div>
     )
@@ -116,6 +120,7 @@ const TreeItems = (props: TreeItemsProps) => {
 const TableOfContents = () => {
     const [filteredItems, setFilteredItems] = useState(TABLEOFCONTENTS_TREEITEMS);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
+    const [modalState, setModalState] = useState<{isOpen: boolean; contentKey: string | null}>({isOpen: false, contentKey: null});
 
     const handleTextChange = (newText: string) => {
         const filtered = filterTreeItems(TABLEOFCONTENTS_TREEITEMS, newText);
@@ -130,9 +135,17 @@ const TableOfContents = () => {
         setExpandedItems(itemIds);
     };
 
+    const handleItemClick = (event: React.SyntheticEvent, nodeId: string) => {
+        if (modalContentMap.hasOwnProperty(nodeId)) {
+            setModalState({isOpen: true, contentKey: nodeId});
+        }
+    };
+
     return (
         <div id='tableofcontents'>
-            <h1 className="handbook-title">The Grappler's Handbook</h1>
+            <div className="title-container">
+                <h1 className="handbook-title">The Grappler's Handbook</h1>
+            </div>
             <div className='logo-container'>
                 <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
             </div>
@@ -146,6 +159,12 @@ const TableOfContents = () => {
                 items={filteredItems}
                 expanded={expandedItems}
                 onExpandedItemsChange={handleExpandedItemsChange}
+                onNodeSelect={handleItemClick}
+            />
+            <DynamicModal
+                isOpen={modalState.isOpen}
+                contentKey={modalState.contentKey}
+                onClose={() => setModalState({isOpen: false, contentKey: null})}
             />
         </div>
     )
