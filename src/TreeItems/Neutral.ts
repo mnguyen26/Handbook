@@ -14,4 +14,11 @@ export const NEUTRAL_CHILDREN =
             
         ]
     },
+    {
+        id: 'sacrifice',
+        label: 'Sacrifice',
+        children: [
+            
+        ]
+    },
 ]

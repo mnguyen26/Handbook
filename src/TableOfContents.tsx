@@ -3,7 +3,6 @@
 //========================================================================================================
 
 import React, { useState } from 'react';
-import { TreeViewBaseItem } from '@mui/x-tree-view/models';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
@@ -101,13 +100,25 @@ const SearchBar = (props: SearchBarProps) => {
 };
 
 const TreeItems = (props: TreeItemsProps) => {
+    const handleExpand = (event: React.SyntheticEvent, itemIds: string[]) => {
+        if (!(event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
+            props.onExpandedItemsChange(event, itemIds);
+        }
+    };
+
+    const handleClick = (event: React.SyntheticEvent, itemId: string) => {
+        if ((event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
+            props.onNodeSelect(event, itemId);
+        }
+    }
+
     return (
         <div className='treeContainer'>
             <RichTreeView 
-            items={props.items} 
-            expandedItems={props.expanded} 
-            onExpandedItemsChange={props.onExpandedItemsChange} 
-            onItemClick={props.onNodeSelect}
+                items={props.items} 
+                expandedItems={props.expanded} 
+                onExpandedItemsChange={handleExpand}
+                onItemClick={handleClick}
             />
         </div>
     )
