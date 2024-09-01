@@ -2,11 +2,9 @@
 
 @keyframes growIn {
   from {
-    transform: translate(-50%, -50%) scale(0.1);
     opacity: 0;
   }
   to {
-    transform: translate(-50%, -100%) scale(1);
     opacity: 1;
   }
 }

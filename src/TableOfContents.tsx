@@ -3,13 +3,20 @@
 //========================================================================================================
 
 import React, { useState } from 'react';
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
+import { RichTreeView, TreeItemProps } from '@mui/x-tree-view';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { TreeItem2 } from '@mui/x-tree-view/TreeItem2';
+import { Box } from '@mui/material';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
 import handbookLogo from './Images/HandbookLogo.jpg'
 import DynamicModal from './DynamicModal';
 import { modalContentMap } from './modalContentMap';
+
 import './Styles/TableOfContents.css';
 
 //========================================================================================================
@@ -76,6 +83,11 @@ interface TreeItemsProps {
     onNodeSelect: (event: React.SyntheticEvent, nodeId: string) => void;
 }
 
+interface CustomTreeItemProps extends TreeItemProps {
+    treeItems: TOCnode[];
+    onNodeSelect: (event: React.SyntheticEvent, nodeId: string) => void;
+}
+
 //========================================================================================================
 // COMPONENTS
 //========================================================================================================
@@ -99,6 +111,49 @@ const SearchBar = (props: SearchBarProps) => {
     );
 };
 
+const CustomTreeItem = ({ treeItems, onNodeSelect, ...props }: CustomTreeItemProps) => {
+    const handleClick = (event: React.SyntheticEvent) => {
+        if (!(event.target as HTMLElement).classList.contains('MuiSvgIcon-root')) {
+            event.preventDefault();
+            event.stopPropagation();
+            onNodeSelect(event, props.itemId);
+        }
+    };
+    
+    const findItemById = (items: TOCnode[], id: string): TOCnode | undefined => {
+        for (const item of items) {
+            if (item.id === id) return item;
+            if (item.children) {
+                const found = findItemById(item.children, id);
+                if (found) return found;
+            }
+        }
+        return undefined;
+    };
+    const currentItem = findItemById(treeItems, props.itemId);
+    const showLibraryIcon = currentItem?.icons?.includes('LibraryBooks');
+    
+    return (
+        <TreeItem
+            {...props}
+            label={
+                <Box display="flex" alignItems="center" justifyContent="space-between" width="auto"
+                    onClick={handleClick}
+                    >
+                    {showLibraryIcon && (
+                        <Box paddingRight={1}>
+                            <LibraryBooksIcon sx={{ fontSize: 11 }} />
+                        </Box>
+                    )}
+                    <span>{props.label}</span>
+                </Box>
+            }
+        >
+            {props.children}
+        </TreeItem>
+    );
+};
+
 const TreeItems = (props: TreeItemsProps) => {
     const handleExpand = (event: React.SyntheticEvent, itemIds: string[]) => {
         if (!(event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
@@ -106,11 +161,11 @@ const TreeItems = (props: TreeItemsProps) => {
         }
     };
 
-    const handleClick = (event: React.SyntheticEvent, itemId: string) => {
-        if ((event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
-            props.onNodeSelect(event, itemId);
-        }
-    }
+    // const handleClick = (event: React.SyntheticEvent, itemId: string) => {
+    //     if ((event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
+    //         props.onNodeSelect(event, itemId);
+    //     }
+    // }
 
     return (
         <div className='treeContainer'>
@@ -118,7 +173,16 @@ const TreeItems = (props: TreeItemsProps) => {
                 items={props.items} 
                 expandedItems={props.expanded} 
                 onExpandedItemsChange={handleExpand}
-                onItemClick={handleClick}
+                // onItemClick={handleClick}
+                slots={{
+                    item: (itemProps: TreeItemProps) => (
+                        <CustomTreeItem
+                            {...itemProps}
+                            treeItems={props.items}
+                            onNodeSelect={props.onNodeSelect}
+                        />
+                    ),
+                }}
             />
         </div>
     )
