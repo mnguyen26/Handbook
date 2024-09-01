@@ -2,28 +2,60 @@
 // IMPORTS
 //========================================================================================================
 
-import React, { useState } from 'react';
+// React
+import React, { useState, useCallback } from 'react';
 
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { RichTreeView, TreeItemProps } from '@mui/x-tree-view';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { TreeItem2 } from '@mui/x-tree-view/TreeItem2';
-import { Box } from '@mui/material';
+// MUI Imports
+import { Box, Button, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
+import { RichTreeView } from '@mui/x-tree-view';
+import {
+  unstable_useTreeItem2 as useTreeItem2,
+  UseTreeItem2Parameters,
+} from '@mui/x-tree-view/useTreeItem2';
+import {
+  TreeItem2Content,
+  TreeItem2IconContainer,
+  TreeItem2GroupTransition,
+  TreeItem2Label,
+  TreeItem2Root,
+} from '@mui/x-tree-view/TreeItem2';
+import { TreeItem2Icon } from '@mui/x-tree-view/TreeItem2Icon';
+import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
+
+// Custom imports
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
-import handbookLogo from './Images/HandbookLogo.jpg'
-import DynamicModal from './DynamicModal';
 import { modalContentMap } from './modalContentMap';
+import DynamicModal from './DynamicModal';
+import handbookLogo from './Images/HandbookLogo.jpg'
 
 import './Styles/TableOfContents.css';
+
+//========================================================================================================
+// INTERFACES
+//========================================================================================================
+
+interface SearchBarProps {
+    onTextChange: (newText: string) => void;
+}
+
+interface TreeItemsProps {
+    items: TOCnode[];
+    expanded: string[];
+    onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
+}
+
+interface CustomTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, Omit<React.HTMLAttributes<HTMLLIElement>, 'onFocus'> {
+    
+}
 
 //========================================================================================================
 // FUNCTIONS
 //========================================================================================================
 
-function filterTreeItems(items: TOCnode[], query: string): TOCnode[] {
+const filterTreeItems = (items: TOCnode[], query: string): TOCnode[] => {
     const lowerCaseQuery = query.toLowerCase();
 
     return items
@@ -53,40 +85,31 @@ const getAllNodeIds = (items: TOCnode[]) => {
     const itemIds: string[] = [];
 
     const storeItemId = (item: TOCnode) => {
-      if (item.children?.length) {
+        if (item.children?.length) {
         itemIds.push(item.id);
         item.children.forEach(storeItemId);
-      }
+        }
     };
-  
+
     TABLEOFCONTENTS_TREEITEMS.forEach(storeItemId);
-  
+
     return itemIds;
-  };
+};
 
-  const getButtonLabel = (expanded: string[]) => {
+const getButtonLabel = (expanded: string[]) => {
     return expanded.length === 0 ? 'Expand all' : 'Collapse all';
-  };
+};
 
-//========================================================================================================
-// INTERFACES
-//========================================================================================================
-
-interface SearchBarProps {
-    onTextChange: (newText: string) => void;
-}
-
-interface TreeItemsProps {
-    items: TOCnode[];
-    expanded: string[];
-    onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
-    onNodeSelect: (event: React.SyntheticEvent, nodeId: string) => void;
-}
-
-interface CustomTreeItemProps extends TreeItemProps {
-    treeItems: TOCnode[];
-    onNodeSelect: (event: React.SyntheticEvent, nodeId: string) => void;
-}
+const findItemById = (items: TOCnode[], id: string): TOCnode | undefined => {
+    for (const item of items) {
+        if (item.id === id) return item;
+        if (item.children) {
+            const found = findItemById(item.children, id);
+            if (found) return found;
+        }
+    }
+    return undefined;
+};
 
 //========================================================================================================
 // COMPONENTS
@@ -111,48 +134,64 @@ const SearchBar = (props: SearchBarProps) => {
     );
 };
 
-const CustomTreeItem = ({ treeItems, onNodeSelect, ...props }: CustomTreeItemProps) => {
-    const handleClick = (event: React.SyntheticEvent) => {
+const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
+  padding: theme.spacing(0.5, 1),
+}));
+
+const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTreeItemProps, ref: React.Ref<HTMLLIElement>,) {
+    const { id, itemId, label, disabled, children, ...other } = props;
+    const {
+        getRootProps,
+        getContentProps,
+        getIconContainerProps,
+        getLabelProps,
+        getGroupTransitionProps,
+        status,
+    } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
+    
+    const [modalState, setModalState] = useState<{isOpen: boolean; contentKey: string | null}>({isOpen: false, contentKey: null});
+
+    const handleItemClick = (event: React.SyntheticEvent) => {
         if (!(event.target as HTMLElement).classList.contains('MuiSvgIcon-root')) {
             event.preventDefault();
             event.stopPropagation();
-            onNodeSelect(event, props.itemId);
-        }
-    };
-    
-    const findItemById = (items: TOCnode[], id: string): TOCnode | undefined => {
-        for (const item of items) {
-            if (item.id === id) return item;
-            if (item.children) {
-                const found = findItemById(item.children, id);
-                if (found) return found;
+
+            if (modalContentMap.hasOwnProperty(itemId)) {
+                setModalState({isOpen: true, contentKey: itemId});
             }
         }
-        return undefined;
     };
-    const currentItem = findItemById(treeItems, props.itemId);
+
+    const currentItem = findItemById(TABLEOFCONTENTS_TREEITEMS, itemId);
     const showLibraryIcon = currentItem?.icons?.includes('LibraryBooks');
-    
+
     return (
-        <TreeItem
-            {...props}
-            label={
-                <Box display="flex" alignItems="center" justifyContent="space-between" width="auto"
-                    onClick={handleClick}
-                    >
+    <>
+    {/* @ts-ignore */}
+    <TreeItem2Provider itemId={itemId}>
+        <TreeItem2Root {...getRootProps(other)}>
+        <CustomTreeItemContent {...getContentProps()}>
+            <TreeItem2IconContainer {...getIconContainerProps()}>
+            <TreeItem2Icon status={status} />
+            </TreeItem2IconContainer>
+                <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }} onClick={handleItemClick}>
                     {showLibraryIcon && (
-                        <Box paddingRight={1}>
-                            <LibraryBooksIcon sx={{ fontSize: 11 }} />
-                        </Box>
+                    <LibraryBooksIcon sx={{ fontSize: 11 }} />
                     )}
-                    <span>{props.label}</span>
+                    <TreeItem2Label {...getLabelProps()} />
                 </Box>
-            }
-        >
-            {props.children}
-        </TreeItem>
+        </CustomTreeItemContent>
+        {children && <TreeItem2GroupTransition {...getGroupTransitionProps()} />}
+        </TreeItem2Root>
+    </TreeItem2Provider>
+    <DynamicModal
+        isOpen={modalState.isOpen}
+        contentKey={modalState.contentKey}
+        onClose={() => setModalState({isOpen: false, contentKey: null})}
+    />
+    </>
     );
-};
+});
 
 const TreeItems = (props: TreeItemsProps) => {
     const handleExpand = (event: React.SyntheticEvent, itemIds: string[]) => {
@@ -161,28 +200,13 @@ const TreeItems = (props: TreeItemsProps) => {
         }
     };
 
-    // const handleClick = (event: React.SyntheticEvent, itemId: string) => {
-    //     if ((event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
-    //         props.onNodeSelect(event, itemId);
-    //     }
-    // }
-
     return (
         <div className='treeContainer'>
             <RichTreeView 
                 items={props.items} 
                 expandedItems={props.expanded} 
                 onExpandedItemsChange={handleExpand}
-                // onItemClick={handleClick}
-                slots={{
-                    item: (itemProps: TreeItemProps) => (
-                        <CustomTreeItem
-                            {...itemProps}
-                            treeItems={props.items}
-                            onNodeSelect={props.onNodeSelect}
-                        />
-                    ),
-                }}
+                slots={{item: CustomTreeItem}}
             />
         </div>
     )
@@ -195,26 +219,19 @@ const TreeItems = (props: TreeItemsProps) => {
 const TableOfContents = () => {
     const [filteredItems, setFilteredItems] = useState(TABLEOFCONTENTS_TREEITEMS);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
-    const [modalState, setModalState] = useState<{isOpen: boolean; contentKey: string | null}>({isOpen: false, contentKey: null});
 
-    const handleTextChange = (newText: string) => {
+    const handleTextChange = useCallback((newText: string) => {
         const filtered = filterTreeItems(TABLEOFCONTENTS_TREEITEMS, newText);
         setFilteredItems(filtered);
-    };
+    }, []);
 
-    const handleExpandClick = () => {
+    const handleExpandClick = useCallback(() => {
         setExpandedItems(expandedItems.length === 0 ? getAllNodeIds(filteredItems) : []);
-    };
+    }, [expandedItems, filteredItems]);
 
-    const handleExpandedItemsChange = (event: React.SyntheticEvent, itemIds: string[],) => {
+    const handleExpandedItemsChange = useCallback((event: React.SyntheticEvent, itemIds: string[]) => {
         setExpandedItems(itemIds);
-    };
-
-    const handleItemClick = (event: React.SyntheticEvent, nodeId: string) => {
-        if (modalContentMap.hasOwnProperty(nodeId)) {
-            setModalState({isOpen: true, contentKey: nodeId});
-        }
-    };
+    }, []);
 
     return (
         <div id='tableofcontents'>
@@ -234,12 +251,6 @@ const TableOfContents = () => {
                 items={filteredItems}
                 expanded={expandedItems}
                 onExpandedItemsChange={handleExpandedItemsChange}
-                onNodeSelect={handleItemClick}
-            />
-            <DynamicModal
-                isOpen={modalState.isOpen}
-                contentKey={modalState.contentKey}
-                onClose={() => setModalState({isOpen: false, contentKey: null})}
             />
         </div>
     )
