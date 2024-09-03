@@ -5,7 +5,8 @@ export const TOP_CHILDREN =
         label: 'Turtle',
         children: [
 
-        ]
+        ],
+        icons: ['OndemandVideo']
     },
     {
         id: 'top-guard',

@@ -9,6 +9,7 @@ import React, { useState, useCallback } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 
 import { RichTreeView } from '@mui/x-tree-view';
 import {
@@ -164,6 +165,7 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTre
 
     const currentItem = findItemById(TABLEOFCONTENTS_TREEITEMS, itemId);
     const showLibraryIcon = currentItem?.icons?.includes('LibraryBooks');
+    const showVideoIcon = currentItem?.icons?.includes('OndemandVideo');
 
     return (
     <>
@@ -174,9 +176,12 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTre
             <TreeItem2IconContainer {...getIconContainerProps()}>
             <TreeItem2Icon status={status} />
             </TreeItem2IconContainer>
-                <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }} onClick={handleItemClick}>
+                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }} onClick={handleItemClick}>
                     {showLibraryIcon && (
                     <LibraryBooksIcon sx={{ fontSize: 11 }} />
+                    )}
+                    {showVideoIcon && (
+                    <OndemandVideoIcon sx={{ fontSize: 11 }} />
                     )}
                     <TreeItem2Label {...getLabelProps()} />
                 </Box>

@@ -13,9 +13,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -100%);
-  width: auto;
-  max-width: 800px;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
   background-color: #fff;
   border: 2px solid #000;
   box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.2);
@@ -24,8 +25,10 @@
 }
 
 .modal-content {
-    font-family: 'Spectral' !important;
-    font-size: 16px;
+  font-family: 'Spectral', serif;
+  font-size: 16px;
+  max-height: calc(80vh - 64px); /* Subtracting padding from max-height */
+  overflow: auto; /* This ensures the content is scrollable */
 }
 
 @media screen and (max-width: 800px) {

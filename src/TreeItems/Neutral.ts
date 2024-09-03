@@ -1,11 +1,12 @@
-export const NEUTRAL_CHILDREN =
+import { TOCnode } from './Base';
+import { LEGGRABS_CHILDREN } from './LegGrabs';
+
+export const NEUTRAL_CHILDREN: TOCnode[] =
 [
     {
         id: 'leggrabs',
         label: 'Leg Grabs',
-        children: [
-
-        ]
+        children: LEGGRABS_CHILDREN
     },
     {
         id: 'upperbody',
