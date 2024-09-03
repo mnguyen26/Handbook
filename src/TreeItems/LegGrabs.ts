@@ -12,18 +12,15 @@ export const LEGGRABS_CHILDREN: TOCnode[] =
         id: 'doubleleg',
         label: 'Double Leg',
         children: [],
-        icons: ['LibraryBooks', 'OndemandVideo']
     },
     {
         id: 'highcrotch',
         label: 'High Crotch',
         children: [],
-        icons: ['LibraryBooks', 'OndemandVideo']
     },
     {
         id: 'leggrabs-other',
         label: 'Other',
         children: [],
-        icons: ['LibraryBooks', 'OndemandVideo']
     },
 ]
