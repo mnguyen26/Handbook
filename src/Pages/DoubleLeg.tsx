@@ -1,32 +1,9 @@
 import React from 'react';
-import { Link, Element } from 'react-scroll';
 
 const DoubleLegContent = () => {
   
   return (
     <div className="double-leg-content relative">
-      <h1>Single Leg Takedown</h1>
-
-      <div>
-        <nav>
-          <Link to="section1" smooth={true} duration={500}>Go to Section 1</Link>
-          <Link to="section2" smooth={true} duration={500}>Go to Section 2</Link>
-          <Link to="section3" smooth={true} duration={500}>Go to Section 3</Link>
-        </nav>
-        <Element name="section1" className="element" style={{ height: '100vh', background: 'lightcoral' }}>
-          <h2>Section 1</h2>
-          <p>Content of Section 1</p>
-        </Element>
-        <Element name="section2" className="element" style={{ height: '100vh', background: 'lightblue' }}>
-          <h2>Section 2</h2>
-          <p>Content of Section 2</p>
-        </Element>
-        <Element name="section3" className="element" style={{ height: '100vh', background: 'lightgreen' }}>
-          <h2>Section 3</h2>
-          <p>Content of Section 3</p>
-        </Element>
-      </div>
-
       <h2>1. Mechanics</h2>
       <p>Before you move onto the rest of this section, make sure you actually know how to shoot a single leg takedown. This is a short overview of the mechanics of a basic single leg.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id aliquam tincidunt, nisi nunc tincidunt urna, nec tincidunt nunc nunc nec nunc. Sed euismod, nunc id aliquam tincidunt, nisi nunc tincidunt urna, nec tincidunt nunc nunc nec nunc. Sed euismod, nunc id aliquam tincidunt, nisi nunc tincidunt urna, nec tincidunt nunc nunc nec nunc.</p>
