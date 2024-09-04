@@ -229,50 +229,9 @@ const TreeItems = (props: TreeItemsProps) => {
     )
 }
 
-// New component for the drawer
-const TOCDrawer: React.FC<TOCDrawerProps> = ({
-    open,
-    onClose,
-    filteredItems,
-    expandedItems,
-    onTextChange,
-    onExpandClick,
-    onExpandedItemsChange
-}) => {
-    return (
-        <Drawer
-            anchor="left"
-            open={open}
-            onClose={onClose}
-        >
-            <Box
-                sx={{ width: 250 }}
-                role="presentation"
-            >
-                <SearchBar 
-                    onTextChange={onTextChange}
-                />
-                <Button onClick={onExpandClick}>
-                    {getButtonLabel(expandedItems)}
-                </Button>
-                <TreeItems 
-                    items={filteredItems}
-                    expanded={expandedItems}
-                    onExpandedItemsChange={onExpandedItemsChange}
-                />
-            </Box>
-        </Drawer>
-    );
-};
-
-//========================================================================================================
-// MAIN COMPONENT
-//========================================================================================================
-
-const TableOfContents = () => {
+const TOCDrawer: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
     const [filteredItems, setFilteredItems] = useState(TABLEOFCONTENTS_TREEITEMS);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
-    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleTextChange = useCallback((newText: string) => {
         const filtered = filterTreeItems(TABLEOFCONTENTS_TREEITEMS, newText);
@@ -286,6 +245,39 @@ const TableOfContents = () => {
     const handleExpandedItemsChange = useCallback((event: React.SyntheticEvent, itemIds: string[]) => {
         setExpandedItems(itemIds);
     }, []);
+
+    return (
+        <Drawer
+            anchor="left"
+            open={open}
+            onClose={onClose}
+        >
+            <Box
+                sx={{ width: 250 }}
+                role="presentation"
+            >
+                <SearchBar 
+                    onTextChange={handleTextChange}
+                />
+                <Button onClick={handleExpandClick}>
+                    {getButtonLabel(expandedItems)}
+                </Button>
+                <TreeItems 
+                    items={filteredItems}
+                    expanded={expandedItems}
+                    onExpandedItemsChange={handleExpandedItemsChange}
+                />
+            </Box>
+        </Drawer>
+    );
+};
+
+//========================================================================================================
+// MAIN COMPONENT
+//========================================================================================================
+
+const TableOfContents = () => {
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);
@@ -305,11 +297,6 @@ const TableOfContents = () => {
             <TOCDrawer
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
-                filteredItems={filteredItems}
-                expandedItems={expandedItems}
-                onTextChange={handleTextChange}
-                onExpandClick={handleExpandClick}
-                onExpandedItemsChange={handleExpandedItemsChange}
             />
         </div>
     )
