@@ -7,9 +7,11 @@ import React, { useState, useCallback } from 'react';
 
 // MUI Imports
 import { Box, Button, TextField } from '@mui/material';
+import { Drawer, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { RichTreeView } from '@mui/x-tree-view';
 import {
@@ -50,6 +52,16 @@ interface TreeItemsProps {
 
 interface CustomTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, Omit<React.HTMLAttributes<HTMLLIElement>, 'onFocus'> {
     
+}
+
+interface TOCDrawerProps {
+    open: boolean;
+    onClose: () => void;
+    filteredItems: TOCnode[];
+    expandedItems: string[];
+    onTextChange: (newText: string) => void;
+    onExpandClick: () => void;
+    onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
 }
 
 //========================================================================================================
@@ -217,6 +229,42 @@ const TreeItems = (props: TreeItemsProps) => {
     )
 }
 
+// New component for the drawer
+const TOCDrawer: React.FC<TOCDrawerProps> = ({
+    open,
+    onClose,
+    filteredItems,
+    expandedItems,
+    onTextChange,
+    onExpandClick,
+    onExpandedItemsChange
+}) => {
+    return (
+        <Drawer
+            anchor="left"
+            open={open}
+            onClose={onClose}
+        >
+            <Box
+                sx={{ width: 250 }}
+                role="presentation"
+            >
+                <SearchBar 
+                    onTextChange={onTextChange}
+                />
+                <Button onClick={onExpandClick}>
+                    {getButtonLabel(expandedItems)}
+                </Button>
+                <TreeItems 
+                    items={filteredItems}
+                    expanded={expandedItems}
+                    onExpandedItemsChange={onExpandedItemsChange}
+                />
+            </Box>
+        </Drawer>
+    );
+};
+
 //========================================================================================================
 // MAIN COMPONENT
 //========================================================================================================
@@ -224,6 +272,7 @@ const TreeItems = (props: TreeItemsProps) => {
 const TableOfContents = () => {
     const [filteredItems, setFilteredItems] = useState(TABLEOFCONTENTS_TREEITEMS);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleTextChange = useCallback((newText: string) => {
         const filtered = filterTreeItems(TABLEOFCONTENTS_TREEITEMS, newText);
@@ -238,6 +287,10 @@ const TableOfContents = () => {
         setExpandedItems(itemIds);
     }, []);
 
+    const toggleDrawer = (open: boolean) => () => {
+        setDrawerOpen(open);
+    };
+
     return (
         <div id='tableofcontents'>
             <div className="title-container">
@@ -246,15 +299,16 @@ const TableOfContents = () => {
             <div className='logo-container'>
                 <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
             </div>
-            <SearchBar 
+            <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
+                <MenuIcon />
+            </IconButton>
+            <TOCDrawer
+                open={drawerOpen}
+                onClose={toggleDrawer(false)}
+                filteredItems={filteredItems}
+                expandedItems={expandedItems}
                 onTextChange={handleTextChange}
-            />
-            <Button onClick={handleExpandClick}>
-                {getButtonLabel(expandedItems)}
-            </Button>
-            <TreeItems 
-                items={filteredItems}
-                expanded={expandedItems}
+                onExpandClick={handleExpandClick}
                 onExpandedItemsChange={handleExpandedItemsChange}
             />
         </div>
