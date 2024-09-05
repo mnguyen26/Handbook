@@ -4,7 +4,7 @@ import NeutralContent from './Pages/Neutral';
 import SingleLegContent from './Pages/SingleLeg';
 import DoubleLegContent from './Pages/DoubleLeg';
 
-export const modalContentMap: { [key: string]: React.ComponentType } = {
+export const ContentMap: { [key: string]: React.ComponentType } = {
     'about': AboutContent,
     'neutral': NeutralContent,
     'singleleg': SingleLegContent,
@@ -12,4 +12,4 @@ export const modalContentMap: { [key: string]: React.ComponentType } = {
     // Add more mappings as needed
 };
 
-export default modalContentMap;
+export default ContentMap;

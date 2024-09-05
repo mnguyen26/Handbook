@@ -1,5 +1,5 @@
 import './Styles/App.css';
-import Handbook from './TableOfContents';
+import Handbook from './Handbook';
 
 function App() {
   return (
