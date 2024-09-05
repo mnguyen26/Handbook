@@ -11,3 +11,5 @@ export const modalContentMap: { [key: string]: React.ComponentType } = {
     'doubleleg': DoubleLegContent,
     // Add more mappings as needed
 };
+
+export default modalContentMap;

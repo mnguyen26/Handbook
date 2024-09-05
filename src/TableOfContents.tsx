@@ -31,6 +31,7 @@ import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 // Custom imports
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
 import handbookLogo from './Images/HandbookLogo.jpg'
+import modalContentMap from './modalContentMap'
 
 import './Styles/TableOfContents.css';
 
@@ -46,6 +47,7 @@ interface TreeItemsProps {
     items: TOCnode[];
     expanded: string[];
     onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
+    setPageId: (pageId: string) => void;
 }
 
 interface CustomTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, Omit<React.HTMLAttributes<HTMLLIElement>, 'onFocus'> {
@@ -54,6 +56,11 @@ interface CustomTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, O
 interface TOCDrawerProps {
     open: boolean;
     onClose: () => void;
+    setPageId: (pageId: string) => void;
+}
+
+interface ContentContainerProps {
+    pageId: string;
 }
 
 //========================================================================================================
@@ -152,8 +159,7 @@ const TreeItems = (props: TreeItemsProps) => {
 
     const handleItemClick = (event: React.MouseEvent, itemId: string) => {
         if ((event.target as HTMLElement).classList.contains('customOnClick')) {
-            console.log(`Item clicked: ${itemId}`);
-            console.log((event.target as HTMLElement).classList);
+            props.setPageId(itemId);
         }
     };
 
@@ -228,6 +234,10 @@ const TOCDrawer = (props: TOCDrawerProps) => {
         setExpandedItems(itemIds);
     }, []);
 
+    const handleSetPageId = (newPageId: string) => {
+        props.setPageId(newPageId);
+    };
+
     return (
         <Drawer
             anchor="left"
@@ -248,9 +258,19 @@ const TOCDrawer = (props: TOCDrawerProps) => {
                     items={filteredItems}
                     expanded={expandedItems}
                     onExpandedItemsChange={handleExpandedItemsChange}
+                    setPageId={handleSetPageId}
                 />
             </Box>
         </Drawer>
+    );
+};
+
+const ContentContainer = (props: ContentContainerProps) => {
+    const Content = modalContentMap[props.pageId];
+    return (
+        <Box sx={{ width: '100%', padding: 2, marginTop: 2 }}>
+            {Content ? <Content /> : <div>Content not found</div>}
+        </Box>
     );
 };
 
@@ -260,9 +280,14 @@ const TOCDrawer = (props: TOCDrawerProps) => {
 
 const Handbook = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [pageId, setPageId] = useState('');
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);
+    };
+
+    const handleSetPageId = (newPageId: string) => {
+        setPageId(newPageId);
     };
 
     return (
@@ -279,9 +304,11 @@ const Handbook = () => {
                 </IconButton>
                 <span style={{ marginLeft: '8px' }}>Table of Contents</span>
             </Box>
+            <ContentContainer pageId={pageId} />
             <TOCDrawer
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
+                setPageId={handleSetPageId}
             />
         </div>
     )
