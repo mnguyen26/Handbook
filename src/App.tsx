@@ -1,10 +1,10 @@
 import './Styles/App.css';
-import TableOfContents from './TableOfContents';
+import Handbook from './TableOfContents';
 
 function App() {
   return (
     <div>
-      <TableOfContents />
+      <Handbook />
     </div>
   );
 }

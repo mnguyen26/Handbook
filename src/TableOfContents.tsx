@@ -30,8 +30,6 @@ import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 
 // Custom imports
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
-import { modalContentMap } from './modalContentMap';
-import DynamicModal from './DynamicModal';
 import handbookLogo from './Images/HandbookLogo.jpg'
 
 import './Styles/TableOfContents.css';
@@ -51,77 +49,19 @@ interface TreeItemsProps {
 }
 
 interface CustomTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, Omit<React.HTMLAttributes<HTMLLIElement>, 'onFocus'> {
-    
 }
 
 interface TOCDrawerProps {
     open: boolean;
     onClose: () => void;
-    filteredItems: TOCnode[];
-    expandedItems: string[];
-    onTextChange: (newText: string) => void;
-    onExpandClick: () => void;
-    onExpandedItemsChange: (event: React.SyntheticEvent, itemIds: string[]) => void;
 }
 
 //========================================================================================================
 // FUNCTIONS
 //========================================================================================================
 
-const filterTreeItems = (items: TOCnode[], query: string): TOCnode[] => {
-    const lowerCaseQuery = query.toLowerCase();
-
-    return items
-        .map(item => {
-            const filteredChildren = filterTreeItems(item.children, lowerCaseQuery);
-
-            const itemMatches = item.label.toLowerCase().includes(lowerCaseQuery);
-
-            if (itemMatches) {
-                return {
-                    ...item,
-                    children: item.children
-                };
-            } 
-            else if (filteredChildren.length > 0) {
-                return {
-                    ...item,
-                    children: filteredChildren
-                };
-            }
-            else return null;
-        })
-        .filter(item => item !== null) as TOCnode[];
-}
-
-const getAllNodeIds = (items: TOCnode[]) => {
-    const itemIds: string[] = [];
-
-    const storeItemId = (item: TOCnode) => {
-        if (item.children?.length) {
-        itemIds.push(item.id);
-        item.children.forEach(storeItemId);
-        }
-    };
-
-    TABLEOFCONTENTS_TREEITEMS.forEach(storeItemId);
-
-    return itemIds;
-};
-
 const getButtonLabel = (expanded: string[]) => {
     return expanded.length === 0 ? 'Expand all' : 'Collapse all';
-};
-
-const findItemById = (items: TOCnode[], id: string): TOCnode | undefined => {
-    for (const item of items) {
-        if (item.id === id) return item;
-        if (item.children) {
-            const found = findItemById(item.children, id);
-            if (found) return found;
-        }
-    }
-    return undefined;
 };
 
 //========================================================================================================
@@ -151,30 +91,27 @@ const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
   padding: theme.spacing(0.5, 1),
 }));
 
-const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTreeItemProps, ref: React.Ref<HTMLLIElement>,) {
+const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTreeItemProps, ref: React.Ref<HTMLLIElement>) {
     const { id, itemId, label, disabled, children, ...other } = props;
     const {
-        getRootProps,
         getContentProps,
         getIconContainerProps,
         getLabelProps,
         getGroupTransitionProps,
         status,
     } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
-    
-    const [modalState, setModalState] = useState<{isOpen: boolean; contentKey: string | null}>({isOpen: false, contentKey: null});
 
-    const handleItemClick = (event: React.SyntheticEvent) => {
-        if (!(event.target as HTMLElement).classList.contains('MuiSvgIcon-root')) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            if (modalContentMap.hasOwnProperty(itemId)) {
-                setModalState({isOpen: true, contentKey: itemId});
+    const findItemById = (items: TOCnode[], id: string): TOCnode | undefined => {
+        for (const item of items) {
+            if (item.id === id) return item;
+            if (item.children) {
+                const found = findItemById(item.children, id);
+                if (found) return found;
             }
         }
+        return undefined;
     };
-
+    
     const currentItem = findItemById(TABLEOFCONTENTS_TREEITEMS, itemId);
     const showLibraryIcon = currentItem?.icons?.includes('LibraryBooks');
     const showVideoIcon = currentItem?.icons?.includes('OndemandVideo');
@@ -183,37 +120,40 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTre
     <>
     {/* @ts-ignore */}
     <TreeItem2Provider itemId={itemId}>
-        <TreeItem2Root {...getRootProps(other)}>
+        {/* <TreeItem2Root {...getRootProps({ ...other, onClick: handleClick })}> */}
+        <TreeItem2Root>
         <CustomTreeItemContent {...getContentProps()}>
             <TreeItem2IconContainer {...getIconContainerProps()}>
             <TreeItem2Icon status={status} />
             </TreeItem2IconContainer>
-                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }} onClick={handleItemClick}>
+                <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
                     {showLibraryIcon && (
                     <LibraryBooksIcon sx={{ fontSize: 11 }} />
                     )}
                     {showVideoIcon && (
                     <OndemandVideoIcon sx={{ fontSize: 11 }} />
                     )}
-                    <TreeItem2Label {...getLabelProps()} />
+                    <TreeItem2Label className='customOnClick' {...getLabelProps()}/>
                 </Box>
         </CustomTreeItemContent>
         {children && <TreeItem2GroupTransition {...getGroupTransitionProps()} />}
         </TreeItem2Root>
     </TreeItem2Provider>
-    <DynamicModal
-        isOpen={modalState.isOpen}
-        contentKey={modalState.contentKey}
-        onClose={() => setModalState({isOpen: false, contentKey: null})}
-    />
     </>
     );
 });
 
 const TreeItems = (props: TreeItemsProps) => {
     const handleExpand = (event: React.SyntheticEvent, itemIds: string[]) => {
-        if (!(event.target as HTMLElement).classList.contains('MuiTreeItem-label')) {
+        if (!(event.target as HTMLElement).classList.contains('customOnClick')) {
             props.onExpandedItemsChange(event, itemIds);
+        }
+    };
+
+    const handleItemClick = (event: React.MouseEvent, itemId: string) => {
+        if ((event.target as HTMLElement).classList.contains('customOnClick')) {
+            console.log(`Item clicked: ${itemId}`);
+            console.log((event.target as HTMLElement).classList);
         }
     };
 
@@ -223,24 +163,66 @@ const TreeItems = (props: TreeItemsProps) => {
                 items={props.items} 
                 expandedItems={props.expanded} 
                 onExpandedItemsChange={handleExpand}
+                onItemClick={handleItemClick}
                 slots={{item: CustomTreeItem}}
             />
         </div>
     )
 }
 
-const TOCDrawer: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+const TOCDrawer = (props: TOCDrawerProps) => {
     const [filteredItems, setFilteredItems] = useState(TABLEOFCONTENTS_TREEITEMS);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+    const getAllNodeIds = useCallback((items: TOCnode[]) => {
+        const itemIds: string[] = [];
+
+        const storeItemId = (item: TOCnode) => {
+            if (item.children?.length) {
+                itemIds.push(item.id);
+                item.children.forEach(storeItemId);
+            }
+        };
+
+        items.forEach(storeItemId);
+
+        return itemIds;
+    }, []);
+
+    const filterTreeItems = useCallback((items: TOCnode[], query: string): TOCnode[] => {
+        const lowerCaseQuery = query.toLowerCase();
+
+        return items
+            .map(item => {
+                const filteredChildren = filterTreeItems(item.children, lowerCaseQuery);
+
+                const itemMatches = item.label.toLowerCase().includes(lowerCaseQuery);
+
+                if (itemMatches) {
+                    return {
+                        ...item,
+                        children: item.children
+                    };
+                } 
+                else if (filteredChildren.length > 0) {
+                    return {
+                        ...item,
+                        children: filteredChildren
+                    };
+                }
+                else return null;
+            })
+            .filter(item => item !== null) as TOCnode[];
+    }, []);
 
     const handleTextChange = useCallback((newText: string) => {
         const filtered = filterTreeItems(TABLEOFCONTENTS_TREEITEMS, newText);
         setFilteredItems(filtered);
-    }, []);
+    }, [filterTreeItems]);
 
     const handleExpandClick = useCallback(() => {
         setExpandedItems(expandedItems.length === 0 ? getAllNodeIds(filteredItems) : []);
-    }, [expandedItems, filteredItems]);
+    }, [expandedItems, filteredItems, getAllNodeIds]);
 
     const handleExpandedItemsChange = useCallback((event: React.SyntheticEvent, itemIds: string[]) => {
         setExpandedItems(itemIds);
@@ -249,8 +231,8 @@ const TOCDrawer: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onC
     return (
         <Drawer
             anchor="left"
-            open={open}
-            onClose={onClose}
+            open={props.open}
+            onClose={props.onClose}
         >
             <Box
                 sx={{ width: 250 }}
@@ -276,7 +258,7 @@ const TOCDrawer: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onC
 // MAIN COMPONENT
 //========================================================================================================
 
-const TableOfContents = () => {
+const Handbook = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const toggleDrawer = (open: boolean) => () => {
@@ -284,16 +266,19 @@ const TableOfContents = () => {
     };
 
     return (
-        <div id='tableofcontents'>
+        <div id='handbook'>
             <div className="title-container">
                 <h1 className="handbook-title">The Grappler's Handbook</h1>
             </div>
             <div className='logo-container'>
                 <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
             </div>
-            <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2 }}>
+                <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
+                    <MenuIcon />
+                </IconButton>
+                <span style={{ marginLeft: '8px' }}>Table of Contents</span>
+            </Box>
             <TOCDrawer
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
@@ -302,4 +287,4 @@ const TableOfContents = () => {
     )
 }
 
-export default TableOfContents;
+export default Handbook;
