@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 .title-container {
-  /* background-color: #e7e7e7;  */
   padding: 20px 0; 
   margin-bottom: 20px;
   display: flex; 
@@ -18,11 +17,6 @@
   font-weight: 400;
   font-style: normal ;
   color: #000000;
-  /* text-shadow: 
-    -1px -1px 0 #000,  
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000; */
 }
 
 .logo-container {
@@ -39,12 +33,12 @@
   height: auto;
 }
 
-.treeContainer {
+/* .treeContainer {
   display: flex;
   justify-content: flex-start;
-}
+} */
 
-.MuiTreeItem-label {
+/* .MuiTreeItem-label {
   font-family: 'Spectral' !important;
   font-size: 16px;
-}
+} */

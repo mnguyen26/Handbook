@@ -3,7 +3,7 @@
 //========================================================================================================
 
 // React
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 // MUI Imports
 import { Box, Button, TextField } from '@mui/material';
@@ -34,6 +34,7 @@ import handbookLogo from './Images/HandbookLogo.jpg'
 import ContentMap from './ContentMap'
 
 import './Styles/TableOfContents.css';
+import './Styles/Pages.css';
 
 //========================================================================================================
 // INTERFACES
@@ -164,7 +165,7 @@ const TreeItems = (props: TreeItemsProps) => {
     };
 
     return (
-        <div className='treeContainer'>
+        <div>
             <RichTreeView 
                 items={props.items} 
                 expandedItems={props.expanded} 
@@ -267,10 +268,9 @@ const TOCDrawer = (props: TOCDrawerProps) => {
 
 const ContentContainer = (props: ContentContainerProps) => {
     const Content = ContentMap[props.pageId];
+
     return (
-        <Box sx={{ width: '100%', padding: 2, marginTop: 2 }}>
-            {Content ? <Content /> : <div>Content not found</div>}
-        </Box>
+        <Content key={props.pageId}/>
     );
 };
 
@@ -280,14 +280,16 @@ const ContentContainer = (props: ContentContainerProps) => {
 
 const Handbook = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [pageId, setPageId] = useState('');
+    const [pageId, setPageId] = useState('about');
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);
     };
 
     const handleSetPageId = (newPageId: string) => {
-        setPageId(newPageId);
+        if (newPageId in ContentMap) {
+            setPageId(newPageId);
+        }
     };
 
     return (

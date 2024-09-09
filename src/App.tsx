@@ -1,4 +1,6 @@
 import './Styles/App.css';
+import './Styles/Pages.css'
+
 import Handbook from './Handbook';
 
 function App() {

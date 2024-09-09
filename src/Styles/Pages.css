@@ -1,15 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap');
 
-@keyframes growIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.modal-box {
+/* .modal-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -22,23 +13,24 @@
   box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.2);
   padding: 32px;
   animation: growIn 0.3s ease-out forwards;
-}
+} */
 
-.modal-content {
+.page-content {
+  max-width: 75%;
+  width: 75%;
+  padding: 32px 48px;
+  margin: 16px auto 0;
+  overflow: auto; 
   font-family: 'Spectral', serif;
+  animation: fadeIn 0.5s ease-in-out;
   font-size: 16px;
-  max-height: calc(80vh - 64px); /* Subtracting padding from max-height */
-  overflow: auto; /* This ensures the content is scrollable */
+  background-color: #faf9f2; /* Light off-white background */
+  box-shadow: 0 -2px -4px rgba(0, 0, 0, 0.1); /* Subtle drop shadow */
+  /* max-height: calc(80vh - 64px);  */
 }
 
-@media screen and (max-width: 800px) {
-  .modal-box {
-    width: 85%;
-    padding: 15px;
-    border: .5px solid #000;
-  }
-
-  .modal-content {
-    font-size: 8px;
-  }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
+

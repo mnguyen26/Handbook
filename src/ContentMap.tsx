@@ -9,7 +9,6 @@ export const ContentMap: { [key: string]: React.ComponentType } = {
     'neutral': NeutralContent,
     'singleleg': SingleLegContent,
     'doubleleg': DoubleLegContent,
-    // Add more mappings as needed
 };
 
 export default ContentMap;
