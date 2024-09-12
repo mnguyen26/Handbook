@@ -8,19 +8,19 @@ export const LEGGRABS_CHILDREN: TOCnode[] =
         children: [],
         icons: ['LibraryBooks', 'OndemandVideo']
     },
-    {
-        id: 'doubleleg',
-        label: 'Double Leg',
-        children: [],
-    },
-    {
-        id: 'highcrotch',
-        label: 'High Crotch',
-        children: [],
-    },
-    {
-        id: 'leggrabs-other',
-        label: 'Other',
-        children: [],
-    },
+    // {
+    //     id: 'doubleleg',
+    //     label: 'Double Leg',
+    //     children: [],
+    // },
+    // {
+    //     id: 'highcrotch',
+    //     label: 'High Crotch',
+    //     children: [],
+    // },
+    // {
+    //     id: 'leggrabs-other',
+    //     label: 'Other',
+    //     children: [],
+    // },
 ]

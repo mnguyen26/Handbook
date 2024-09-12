@@ -38,3 +38,9 @@
   min-width: 10px;
   height: auto;
 }
+
+.toc-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

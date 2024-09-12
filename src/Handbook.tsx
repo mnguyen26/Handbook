@@ -297,12 +297,12 @@ const Handbook = () => {
                     <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
                 </div>
             </div>
-            <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2 }}>
+            <div className="toc-box">
                 <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
                     <MenuIcon />
                 </IconButton>
                 <span style={{ marginLeft: '8px' }}>Table of Contents</span>
-            </Box>
+            </div>
             <ContentContainer pageId={pageId} />
             <TOCDrawer
                 open={drawerOpen}

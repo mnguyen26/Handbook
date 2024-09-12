@@ -86,19 +86,13 @@ const VideoThumbnail = (props: VideoThumbnailProps) => {
           <div className="video-modal"
             onClick={handleCloseModal}
           >
-            <div
+            <div className="video-container"
               onClick={(e) => e.stopPropagation()}
-              style={{
-                background: 'white',
-                padding: '20px',
-                borderRadius: '8px',
-                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-              }}
             >
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/${videoId}`}
+                src={`https://www.youtube.com/embed/${props.videoId}`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -119,6 +113,7 @@ const SectionContent = (props: SectionContentProps) => {
           {section.level === 1 && <h1>{section.title}</h1>}
           {section.level === 2 && <h2>{section.title}</h2>}
           {section.level === 3 && <h3>{section.title}</h3>}
+          {section.level === 4 && <h4>{section.title}</h4>}
           {section.video && (
             <VideoThumbnail videoId={section.video} title={section.title}/>
           )}

@@ -22,14 +22,14 @@
 }
 
 .page-sections {
-  flex: 1 1 80%;
+  flex: 1 1 75%;
   padding-right: 20px;
   overflow-y: auto;
 }
 
 .page-quick-nav {
-  flex: 1 1 20%;
-  overflow-y: hidden;
+  flex: 1 1 25%;
+  overflow-y: auto;
   padding-left: 2vw;
 }
 
@@ -56,4 +56,11 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+.video-container {
+  background: rgb(39, 39, 39);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
