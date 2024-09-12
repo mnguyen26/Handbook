@@ -31,9 +31,9 @@ import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 // Custom imports
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
 import handbookLogo from './Images/HandbookLogo.jpg'
-import ContentMap from './ContentMap'
+import {ContentMap, renderContent} from './ContentMap'
 
-import './Styles/TableOfContents.css';
+import './Styles/Header.css';
 import './Styles/Pages.css';
 
 //========================================================================================================
@@ -128,7 +128,6 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTre
     <>
     {/* @ts-ignore */}
     <TreeItem2Provider itemId={itemId}>
-        {/* <TreeItem2Root {...getRootProps({ ...other, onClick: handleClick })}> */}
         <TreeItem2Root>
         <CustomTreeItemContent {...getContentProps()}>
             <TreeItem2IconContainer {...getIconContainerProps()}>
@@ -267,11 +266,7 @@ const TOCDrawer = (props: TOCDrawerProps) => {
 };
 
 const ContentContainer = (props: ContentContainerProps) => {
-    const Content = ContentMap[props.pageId];
-
-    return (
-        <Content key={props.pageId}/>
-    );
+    return renderContent(props.pageId);
 };
 
 //========================================================================================================
@@ -294,11 +289,13 @@ const Handbook = () => {
 
     return (
         <div id='handbook'>
-            <div className="title-container">
-                <h1 className="handbook-title">The Grappler's Handbook</h1>
-            </div>
-            <div className='logo-container'>
-                <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
+            <div className="header-container">
+                <div className="title-container">
+                    <h1 className="handbook-title">The Grappler's Handbook</h1>
+                </div>
+                <div className='logo-container'>
+                    <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
+                </div>
             </div>
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2 }}>
                 <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">

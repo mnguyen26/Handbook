@@ -1,79 +1,24 @@
-import React, { useRef, useEffect, useState } from 'react';
-
-interface Section {
-  title: string;
-  level: number;
-  content: string[]; // Changed from string to string[]
-  ref: string;
-}
-
-interface QuickNavProps {
-  sections: Section[];
-  sectionRefs: Record<string, React.RefObject<HTMLElement>>;
-  onSectionClick: (ref: React.RefObject<HTMLElement>) => void;
-}
-
-const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
-  ref.current?.scrollIntoView({ behavior: 'smooth' });
-};
-
-const QuickNav = (props: QuickNavProps) => {
-
-  return (
-    <nav className="quick-nav">
-      <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-        {props.sections.map((section, index) => (
-          <li 
-            key={index}
-            style={{ 
-              marginLeft: `${(section.level - 2) * 10}px`,
-              fontSize: `${1 - (section.level - 2) * 0.1}em`,
-              marginTop: section.level === 2 ? '4px' : '2px'
-            }}
-          >
-            <a 
-              onClick={() => props.onSectionClick(props.sectionRefs[section.ref])}
-              style={{ cursor: 'pointer', display: 'block', padding: '1px 0' }}
-            >
-              {section.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
-interface SectionContentProps {
-  sections: Section[];
-  sectionRefs: Record<string, React.RefObject<HTMLElement>>;
-}
-
-const SectionContent = (props: SectionContentProps) => {
-  return (
-    <>
-      {props.sections.map((section) => (
-        <section key={section.ref} ref={props.sectionRefs[section.ref]}>
-          {section.level === 1 && <h1>{section.title}</h1>}
-          {section.level === 2 && <h2>{section.title}</h2>}
-          {section.level === 3 && <h3>{section.title}</h3>}
-          {section.content.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </section>
-      ))}
-    </>
-  );
-};
-
-const SingleLegContent = () => {
-  const sections: Section[] = [
+  import { Section } from "./PageTemplate";
+  
+  export const singleLegSections: Section[] = [
     { 
       title: "Single Leg Takedown", 
       level: 1, 
-      content: ["Introduction to single leg takedown..."],
+      content: [`The single-leg is one of the most common leg grab techniques used in wrestling and jiujitsu due to its
+         simplicty and effectiveness. Below I will go over different types of single-legs, setups, as well as a variety 
+         of finishes both from the standing position and on the mat.`],
       ref: "introRef"
     },
+    {
+      title: "Mechanics",
+      level: 2,
+      content: [`Shooting a single leg is a basic movement that any grappler must master. The movement is very similar to shooting a double-leg or high-crotch the main differences being head placement and how you grab the legs.`,
+      `We start most shots by lowering our level beneath our opponent. A good cue to tell whether or not you are low enough to shoot is whether your head is beneath your opponent's. Another important thing to note is your posture; you want your head and chest to still be facing forward as much as possible when lowering your level. If they start to face the ground, it becomes much easier for your opponent to grab your neck or sprawl. After that we take a penetration step in order to get close enough to even grab legs. Remember to drive off your rear foot and not just step forward with your lead foot. We want to cover distance as much as we can with our step rather than reaching with our arms in order to prevent giving a big gap for our opponent to dig underhooks with. If you start reaching too much, it's easy for your opponent to get you with a cow-catcher or perform a number of other underhook counters. Once we reach the leg we want to form a closed tight loop by making a gable grip and pinching our elbows together. Additionally, bring the leg tight to your chest by squeezing your back muscles. Lastly, our trail leg follows which we can use to drive into our opponent.`],
+      ref: "mechanicsRef",
+      video: "KmnuMHqWcCk"
+    },
+
+
     { 
       title: "Mechanics", 
       level: 2, 
@@ -167,43 +112,4 @@ const SingleLegContent = () => {
     },
   ];
 
-  const [sectionRefs, setSectionRefs] = useState<Record<string, React.RefObject<HTMLElement>>>({});
-
-  useEffect(() => {
-    const refs: Record<string, React.RefObject<HTMLElement>> = {};
-    sections.forEach((section) => {
-      refs[section.ref] = React.createRef<HTMLElement>();
-    });
-    setSectionRefs(refs);
-  }, []);
-
-  if (Object.keys(sectionRefs).length === 0) {
-    return null; // do not render component until refs are set
-  }
-
-  return (
-    <div style={{ display: 'flex' }} className='page-content'>
-      <div style={{ flex: 1, paddingRight: '20px' }}>
-        <SectionContent sections={sections} sectionRefs={sectionRefs} />
-      </div>
-
-      <div style={{
-        width: '200px',
-        position: 'sticky',
-        top: '20px',
-        alignSelf: 'flex-start',
-        maxHeight: 'calc(100vh - 40px)',
-        overflowY: 'auto'
-      }}>
-        <QuickNav 
-          sections={sections} 
-          sectionRefs={sectionRefs} 
-          onSectionClick={scrollToSection} 
-        />
-      </div>
-    </div>
-  );
-};
-
-export default SingleLegContent;
-
+  export default singleLegSections;

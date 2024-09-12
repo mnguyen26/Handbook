@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+/* MMN Rename this file */
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.title-container {
+  flex-grow: 1;
+
+}
+
+.handbook-title {
+  text-align: right;
+  margin: 0;
+  font-size: clamp(12px, 5vw, 64px);
+  font-family: 'Playfair Display';
+  font-weight: 400;
+  font-style: normal ;
+  color: #000000;
+}
+
+.logo-container {
+  flex-grow: 1;
+  padding-left: 1rem;
+}
+
+.handbook-logo {
+  width: 50%; 
+  max-width: 60px; 
+  min-width: 10px;
+  height: auto;
+}
