@@ -33,12 +33,11 @@ const QuickNav = (props: QuickNavProps) => {
         <nav className="quick-nav">
             <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
             {props.sections.map((section, index) => (
-                <li 
+                <li className="quick-nav-item"
                 key={index}
                 style={{ 
-                    marginLeft: `${(section.level - 2) * 10}px`,
-                    fontSize: `${1 - (section.level - 2) * 0.1}em`,
-                    marginTop: section.level === 2 ? '4px' : '2px'
+                    marginLeft: `${(section.level - 2) * 1}em`,
+                    marginTop: section.level === 2 ? '0.25em' : '0.125em'
                 }}
                 >
                 <a 
