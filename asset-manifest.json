@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Handbook/static/css/main.5df922b3.css",
-    "main.js": "/Handbook/static/js/main.9080b202.js",
-    "static/media/HandbookLogo.jpg": "/Handbook/static/media/HandbookLogo.8065155ec700ad5d5bec.jpg",
-    "index.html": "/Handbook/index.html",
-    "main.5df922b3.css.map": "/Handbook/static/css/main.5df922b3.css.map",
-    "main.9080b202.js.map": "/Handbook/static/js/main.9080b202.js.map"
+    "main.css": "/static/css/main.5df922b3.css",
+    "main.js": "/static/js/main.b2cd3a79.js",
+    "static/media/HandbookLogo.jpg": "/static/media/HandbookLogo.8065155ec700ad5d5bec.jpg",
+    "index.html": "/index.html",
+    "main.5df922b3.css.map": "/static/css/main.5df922b3.css.map",
+    "main.b2cd3a79.js.map": "/static/js/main.b2cd3a79.js.map"
   },
   "entrypoints": [
     "static/css/main.5df922b3.css",
-    "static/js/main.9080b202.js"
+    "static/js/main.b2cd3a79.js"
   ]
 }
