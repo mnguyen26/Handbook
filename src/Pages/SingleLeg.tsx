@@ -259,7 +259,7 @@
          their legs back giving you access to grab the opposite leg. Simply block the knee with your hand and 
          drive fowards.`],
       ref: "kneeTapRef",
-      video: "4u0yFB2TsME?start=850"
+      video: "4u0yFB2TsME?start=870"
     },
     {
       title: "Shelf the Leg",
