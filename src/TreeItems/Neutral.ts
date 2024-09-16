@@ -1,5 +1,6 @@
 import { TOCnode } from './Base';
 import { LEGGRABS_CHILDREN } from './LegGrabs';
+import { UPPERBODY_CHILDREN } from './UpperBody';
 
 export const NEUTRAL_CHILDREN: TOCnode[] =
 [
@@ -11,9 +12,7 @@ export const NEUTRAL_CHILDREN: TOCnode[] =
     {
         id: 'upperbody',
         label: 'Upper Body',
-        children: [
-            
-        ]
+        children: UPPERBODY_CHILDREN
     },
     {
         id: 'sacrifice',
