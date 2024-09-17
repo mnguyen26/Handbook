@@ -10,15 +10,11 @@ export interface Section {
 }
 
 interface SectionContentProps {
-    // sections: Section[];
-    // sectionRefs: Record<string, React.RefObject<HTMLElement>>;
     section: Section;
 }
 
 interface QuickNavProps {
     sections: Section[];
-    // sectionRefs: Record<string, React.RefObject<HTMLElement>>;
-    // onSectionClick: (ref: React.RefObject<HTMLElement>) => void;
     onSectionClick: (ref: string) => void;
 }
 
@@ -27,10 +23,6 @@ export interface PageContentProps {
     showQuickNav?: boolean;
 }
 
-// const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
-//     ref.current?.scrollIntoView({ behavior: 'smooth' });
-// };
-
 const QuickNav = (props: QuickNavProps) => {
   
   const renderSections = (sections: Section[], depth: number) => {
@@ -38,7 +30,6 @@ const QuickNav = (props: QuickNavProps) => {
       <li className="quick-nav-item" 
         key={index} 
         style={{ 
-          // marginLeft: `${depth * 1}em`, marginTop: '0.125em' 
           marginLeft: `${(depth - 2) * 1}em`,
           marginTop: depth === 2 ? '0.25em' : '0.125em'
         }}
@@ -61,22 +52,6 @@ const QuickNav = (props: QuickNavProps) => {
     return (
         <nav className="quick-nav">
             <ul className="quick-nav-ul">
-            {/* {props.sections.map((section, index) => (
-                <li className="quick-nav-item"
-                key={index}
-                style={{ 
-                    marginLeft: `${(section.level - 2) * 1}em`,
-                    marginTop: section.level === 2 ? '0.25em' : '0.125em'
-                }}
-                >
-                <a 
-                    onClick={() => props.onSectionClick(section.ref)}
-                    style={{ cursor: 'pointer', display: 'block', padding: '1px 0' }}
-                >
-                    {section.title}
-                </a>
-                </li>
-            ))} */}
             {renderSections(props.sections, 1)}
             </ul>
         </nav>
@@ -134,27 +109,6 @@ const VideoThumbnail = (props: VideoThumbnailProps) => {
     );
 };
 
-// const SectionContent = (props: SectionContentProps) => {
-//   return (
-//     <>
-//       {props.sections.map((section) => (
-//         <section key={section.ref} ref={props.sectionRefs[section.ref]}>
-//           {section.level === 1 && <h1>{section.title}</h1>}
-//           {section.level === 2 && <h2>{section.title}</h2>}
-//           {section.level === 3 && <h3>{section.title}</h3>}
-//           {section.level === 4 && <h4>{section.title}</h4>}
-//           {section.video && (
-//             <VideoThumbnail videoId={section.video} title={section.title}/>
-//           )}
-//           {section.content.map((paragraph, index) => (
-//             <p key={index}>{paragraph}</p>
-//           ))}
-//         </section>
-//       ))}
-//     </>
-//   );
-// };
-
 const SectionContent = (props: SectionContentProps) => {
   return (
     <div className="fade-in">
@@ -168,20 +122,7 @@ const SectionContent = (props: SectionContentProps) => {
 };
 
 export const PageContent = (props: PageContentProps) => {
-  // const [sectionRefs, setSectionRefs] = useState<Record<string, React.RefObject<HTMLElement>>>({});
   const [currentSection, setCurrentSection] = useState<Section>(props.sections[0]);
-
-  // useEffect(() => {
-  //   const refs: Record<string, React.RefObject<HTMLElement>> = {};
-  //   props.sections.forEach((section) => {
-  //     refs[section.ref] = React.createRef<HTMLElement>();
-  //   });
-  //   setSectionRefs(refs);
-  // }, [props.sections]);
-
-  // if (Object.keys(sectionRefs).length === 0) {
-  //   return null; // do not render component until refs are set
-  // }
 
   useEffect(() => {
     setCurrentSection(props.sections[0]);
@@ -217,7 +158,6 @@ export const PageContent = (props: PageContentProps) => {
   return (
     <div className='page-content'>
         <div className='page-sections'>
-            {/* <SectionContent sections={props.sections} sectionRefs={sectionRefs} /> */}
             <SectionContent key={currentSection.ref} section={currentSection} />
         </div>
         {props.showQuickNav && (<hr />)}
@@ -225,7 +165,6 @@ export const PageContent = (props: PageContentProps) => {
           <div className='page-quick-nav'>
             <QuickNav 
                 sections={props.sections} 
-                // sectionRefs={sectionRefs} 
                 onSectionClick={setSectionFromRef} 
             />
         </div>
