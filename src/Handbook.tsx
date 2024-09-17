@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
 
 import { RichTreeView } from '@mui/x-tree-view';
 import {
@@ -64,6 +65,10 @@ interface ContentContainerProps {
     pageId: string;
 }
 
+interface CustomLabelProps {
+    children: React.ReactNode;
+}
+
 //========================================================================================================
 // FUNCTIONS
 //========================================================================================================
@@ -98,6 +103,20 @@ const SearchBar = (props: SearchBarProps) => {
 const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
   padding: theme.spacing(0.5, 1),
 }));
+
+const StyledCustomTreeLabelText = styled(Typography)({
+    color: 'inherit',
+    fontFamily: 'Spectral' , 
+    fontWeight: 500,
+});
+
+const CustomTreeLabel = ({children}: CustomLabelProps) => {
+    return (
+      <TreeItem2Label>
+        <StyledCustomTreeLabelText className='customOnClick'>{children}</StyledCustomTreeLabelText>
+      </TreeItem2Label>
+    );
+}
 
 const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTreeItemProps, ref: React.Ref<HTMLLIElement>) {
     const { id, itemId, label, disabled, children, ...other } = props;
@@ -140,7 +159,7 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(props: CustomTre
                     {showVideoIcon && (
                     <OndemandVideoIcon sx={{ fontSize: 11 }} />
                     )}
-                    <TreeItem2Label className='customOnClick' {...getLabelProps()}/>
+                    <CustomTreeLabel {...getLabelProps()}/>
                 </Box>
         </CustomTreeItemContent>
         {children && <TreeItem2GroupTransition {...getGroupTransitionProps()} />}
@@ -201,7 +220,6 @@ const TOCDrawer = (props: TOCDrawerProps) => {
         return items
             .map(item => {
                 const filteredChildren = filterTreeItems(item.children, lowerCaseQuery);
-
                 const itemMatches = item.label.toLowerCase().includes(lowerCaseQuery);
 
                 if (itemMatches) {
