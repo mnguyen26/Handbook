@@ -26,36 +26,52 @@ export interface PageContentProps {
 const QuickNav = (props: QuickNavProps) => {
   
   const renderSections = (sections: Section[], depth: number) => {
-    return sections.map((section, index) => (
-      <li className="quick-nav-item" 
-        key={index} 
-        style={{ 
-          marginLeft: `${(depth - 2) * 1}em`,
-          marginTop: depth === 2 ? '0.25em' : '0.125em'
-        }}
-      >
-        <a 
-          onClick={() => props.onSectionClick(section.ref)} 
-          style={{ cursor: 'pointer', display: 'block', padding: '1px 0' }}
-        >
-          {section.title}
-        </a>
-        {section.children && section.children.length > 0 && (
-          <ul className="quick-nav-ul">
-            {renderSections(section.children, depth + 1)}
-          </ul>
-        )}
-      </li>
-    ));
+    return (
+      sections.map((section, index) => (
+        <>
+          <li className="quick-nav-item" 
+            key={index} 
+            style={{ 
+              marginLeft: `${(depth - 2) * 1}em`,
+              marginTop: depth === 2 ? '0.25em' : '0.125em',
+              fontSize: `${1.7 - (.2*depth)}vw`,
+              transition: 'font-size 0.2s'
+            }}
+            onMouseOver={(e) => {
+              if (section.ref) {
+                e.currentTarget.style.fontSize = `${1.8 - (.2*depth)}vw`;
+              }
+            }}
+            onMouseOut={(e) => {
+              if (section.ref) {
+                e.currentTarget.style.fontSize = `${1.7 - (.2*depth)}vw`;
+              }
+            }}
+          >
+            <a 
+              onClick={() => props.onSectionClick(section.ref)} 
+              style={{ cursor: section.ref ? 'pointer' : 'default', display: 'block', padding: '1px 0' }}
+            >
+              {section.title}
+            </a>
+          </li>
+          {section.children && section.children.length > 0 && (
+            <div>
+              {renderSections(section.children, depth + 1)}
+            </div>
+          )}
+        </>
+      ))
+    );
   };
 
-    return (
-        <nav className="quick-nav">
-            <ul className="quick-nav-ul">
-            {renderSections(props.sections, 1)}
-            </ul>
-        </nav>
-    );
+  return (
+      <nav className="quick-nav">
+          <ul className="quick-nav-ul">
+          {renderSections(props.sections, 1)}
+          </ul>
+      </nav>
+  );
 };
 
 interface VideoThumbnailProps {
@@ -116,7 +132,11 @@ const SectionContent = (props: SectionContentProps) => {
       {props.section.video && (
         <VideoThumbnail videoId={props.section.video} title={props.section.title}/>
       )}
-      <p key={props.section.ref}>{props.section.content}</p>
+      {props.section.content.map((item, index) => (
+        <p key={`${props.section.ref}-${index}`}>
+          <span style={{ marginLeft: '1em' }}>&nbsp;</span>{item}
+        </p>
+      ))}
     </div>
   )
 };

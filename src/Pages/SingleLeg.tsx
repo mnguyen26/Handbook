@@ -3,7 +3,7 @@
   //MMN add the peak out finish and cradle
   export const singleLegSections: Section[] = [
     { 
-      title: "Single Leg Takedown", 
+      title: "Single Leg", 
       level: 1, 
       content: [`The single-leg is one of the most common leg grab techniques used in wrestling and jiujitsu due to its
          simplicty and effectiveness. This sections over different types of single-legs, setups, as well as a variety 
@@ -64,9 +64,8 @@
         {
           title: "Setups",
           level: 2,
-          content: [`Here are a few ways you can set yourself up to shoot a single leg. It can be performed in situations 
-            where you are tied up with your opponent as well as out in the open without connections.`],
-          ref: "setupsRef",
+          content: [``],
+          ref: "",
           children: [
             {
               title: "Inside Ties",
