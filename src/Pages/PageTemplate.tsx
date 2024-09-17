@@ -26,6 +26,13 @@ export interface PageContentProps {
 const QuickNav = (props: QuickNavProps) => {
   
   const renderSections = (sections: Section[], depth: number) => {
+    const defaultFontSize = 1.4;
+    const decStep = .2;
+    const quickNavItem = document.querySelector('.quick-nav-item') as Element | null;
+    const customFontSize = quickNavItem 
+      ? parseFloat(getComputedStyle(quickNavItem).getPropertyValue('--custom-font-size')) || defaultFontSize
+      : defaultFontSize;
+
     return (
       sections.map((section, index) => (
         <>
@@ -34,17 +41,17 @@ const QuickNav = (props: QuickNavProps) => {
             style={{ 
               marginLeft: `${(depth - 2) * 1}em`,
               marginTop: depth === 2 ? '0.25em' : '0.125em',
-              fontSize: `${1.6 - (.2*depth)}vw`,
+              fontSize: `${customFontSize - (decStep*depth)}vw`,
               transition: 'font-size 0.2s'
             }}
             onMouseOver={(e) => {
               if (section.ref) {
-                e.currentTarget.style.fontSize = `${1.7 - (.2*depth)}vw`;
+                e.currentTarget.style.fontSize = `${(customFontSize+decStep) - (decStep*depth)}vw`;
               }
             }}
             onMouseOut={(e) => {
               if (section.ref) {
-                e.currentTarget.style.fontSize = `${1.6 - (.2*depth)}vw`;
+                e.currentTarget.style.fontSize = `${customFontSize - (decStep*depth)}vw`;
               }
             }}
           >
