@@ -4,8 +4,6 @@ import { neutralSections } from './Pages/Neutral';
 import { singleLegSections } from './Pages/SingleLeg';
 import { underhookSections } from './Pages/Underhook';
 
-
-
 export const ContentMap: { [key: string]: PageContentProps } = {
     'about': { sections: aboutSections },
     'neutral': { sections: neutralSections },
@@ -16,11 +14,15 @@ export const ContentMap: { [key: string]: PageContentProps } = {
 export const renderContent = (key: string) => {
     const pageContentProps = ContentMap[key];
 
-    if (!pageContentProps) return null;
-    return <PageContent 
-            sections={pageContentProps.sections} 
-            showQuickNav={pageContentProps.showQuickNav} 
-            />;
+    if (pageContentProps) {
+        return <PageContent 
+                sections={pageContentProps.sections} 
+                showQuickNav={pageContentProps.showQuickNav} 
+                />;
+    }
+    else {
+        return null
+    }
 };
 
 export default ContentMap;

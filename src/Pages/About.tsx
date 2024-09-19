@@ -1,4 +1,5 @@
 import { Section } from "./PageTemplate";
+import Quotes from "./Quotes";
   
 export const aboutSections: Section[] = [
   { 
@@ -9,7 +10,8 @@ export const aboutSections: Section[] = [
             experimentation in training and competition. I, myself, am continually learning and our sport is continually evolving so the content will constantly be changing
             accordingly. I hope this resource is useful to you as an informational tool, but remember, the best way to learn and improve is to get on the mats and train. 
             Get started by searching for something in the table of contents.`],
-    ref: "aboutRef"
+    ref: "aboutRef",
+    component: () => <Quotes />
   }
 ];
 

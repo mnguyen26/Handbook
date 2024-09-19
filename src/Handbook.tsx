@@ -284,7 +284,9 @@ const TOCDrawer = (props: TOCDrawerProps) => {
 };
 
 const ContentContainer = (props: ContentContainerProps) => {
-    return renderContent(props.pageId);
+    return (
+        renderContent(props.pageId)
+    );
 };
 
 //========================================================================================================

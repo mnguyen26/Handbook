@@ -1,6 +1,6 @@
   import { Section } from "./PageTemplate";
   
-  //MMN add the peak out finish and cradle
+  //MMN add the peak out, crade, and barzegar
   export const singleLegSections: Section[] = [
     { 
       title: "Single Leg", 

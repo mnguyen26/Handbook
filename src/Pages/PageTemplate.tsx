@@ -6,6 +6,7 @@ export interface Section {
   content: string[];
   ref: string;
   video?: string;
+  component?: React.FC;
   children?: Section[];
 }
 
@@ -144,6 +145,7 @@ const SectionContent = (props: SectionContentProps) => {
           <span style={{ marginLeft: '1em' }}>&nbsp;</span>{item}
         </p>
       ))}
+      {props.section.component && <props.section.component />} 
     </div>
   )
 };
