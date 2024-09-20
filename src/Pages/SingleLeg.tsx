@@ -19,8 +19,19 @@
             {
               title: "Standard Single",
               level: 3,
-              content: [`Shooting a single leg is a basic movement that any grappler must master. The movement is very similar to shooting a double-leg or high-crotch the main differences being head placement and how you grab the legs.`,
-              `We start most shots by lowering our level beneath our opponent. A good cue to tell whether or not you are low enough to shoot is whether your head is beneath your opponent's. Another important thing to note is your posture; you want your head and chest to still be facing forward as much as possible when lowering your level. If they start to face the ground, it becomes much easier for your opponent to grab your neck or sprawl. After that we take a penetration step in order to get close enough to even grab legs. Remember to drive off your rear foot and not just step forward with your lead foot. We want to cover distance as much as we can with our step rather than reaching with our arms in order to prevent giving a big gap for our opponent to dig underhooks with. If you start reaching too much, it's easy for your opponent to get you with a cow-catcher or perform a number of other underhook counters. Once we reach the leg we want to form a closed tight loop by making a gable grip and pinching our elbows together. Additionally, bring the leg tight to your chest by squeezing your back muscles. Lastly, our trail leg follows which we can use to drive into our opponent.`],
+              content: [`Shooting a single leg is a basic movement that any grappler must master. The movement is very similar to 
+                shooting a double-leg or high-crotch the main differences being head placement and how you grab the legs.`,
+              `We start most shots by lowering our level beneath our opponent. A good cue to tell whether or not you are low enough 
+              to shoot is whether your head is beneath your opponent's. Another important thing to note is your posture; you want 
+              your head and chest to still be facing forward as much as possible when lowering your level. If they start to face 
+              the ground, it becomes much easier for your opponent to grab your neck or sprawl. After that we take a penetration 
+              step in order to get close enough to even grab legs. Remember to drive off your rear foot and not just step forward 
+              with your lead foot. We want to cover distance as much as we can with our step rather than reaching with our arms in 
+              order to prevent giving a big gap for our opponent to dig underhooks with. If you start reaching too much, it's easy 
+              for your opponent to get you with a cow-catcher or perform a number of other underhook counters. Once we reach the 
+              leg we want to form a closed tight loop by making a gable grip and pinching our elbows together. Additionally, 
+              bring the leg tight to your chest by squeezing your back muscles. Lastly, our trail leg follows which we can use to 
+              drive into our opponent.`],
               ref: "StandardSingleRef",
               video: "4u0yFB2TsME"
             },
@@ -28,10 +39,11 @@
               title: "Variations: Sweep Single",
               level: 3,
               content: [`The sweep single is a variation of the single-leg where you take a curved circular path as you shoot 
-                instead of shooting straight into your opponent. It has the benefit of not allowing your opponent to sprawl 
-                directly on top of you if they do since you should end up on the side rather than right in front of them. 
-                It also gets you out of the way of any counters your opponent tries to attempt with the hands and arms such
-                as grabbing chokes. `],
+                instead of shooting straight into your opponent. You should end up on the side of your opponent instead of in 
+                front of them. It requires a little bit of speed because you are taking a longer path but it has the benefit 
+                of not allowing your opponent to sprawl directly on top of you. You should, rather, end up in a dog-fight. 
+                It also keeps your head out of the way of many chokes since you should end up facing the same direction as 
+                your opponent instead of into your opponent. `],
               ref: "variationsSweepSingleRef",
               video: "4u0yFB2TsME?start=85"
             },
@@ -210,9 +222,14 @@
                 {
                   title: "Tree Top Finish",
                   level: 4,
-                  content: [`If elevating your opponent's leg up to your armpit decreases their balance, elevating it
-                      even higher over your shoulder does so even more. If you can get to the tree top position, you
-                      should always finish the single-leg. `],
+                  content: [`If elevating your opponent's leg up to your armpit disrupts your opponent's balance, 
+                    elevating it even higher over your shoulder does so even more. If you can get to the tree top 
+                    position, you will have a high percentage chance of finishing even if your opponent is very 
+                    flexible. `
+                  , `Start by taking a scoop grip with your free arm and raising your leg on the side that you are holding 
+                  the leg. This ensures the leg stays elevated while you switch your grip from an over-wrap to a scoop at the 
+                  shoulder. Quickly change levels similar to a power clean and switch to a scoop grip. Then just stand up and 
+                  drive your feet.`],
                   ref: "treeTopRef",
                   video: "4u0yFB2TsME?start=671"
                 },

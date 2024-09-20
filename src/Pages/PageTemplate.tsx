@@ -24,6 +24,11 @@ export interface PageContentProps {
     showQuickNav?: boolean;
 }
 
+interface VideoThumbnailProps {
+  videoId: string
+  title: string
+}
+
 const QuickNav = (props: QuickNavProps) => {
   
   const renderSections = (sections: Section[], depth: number) => {
@@ -81,11 +86,6 @@ const QuickNav = (props: QuickNavProps) => {
       </nav>
   );
 };
-
-interface VideoThumbnailProps {
-    videoId: string
-    title: string
-}
 
 const VideoThumbnail = (props: VideoThumbnailProps) => {
     const [isOpen, setIsOpen] = useState(false);
