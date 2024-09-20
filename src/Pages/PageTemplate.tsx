@@ -61,12 +61,12 @@ const QuickNav = (props: QuickNavProps) => {
               }
             }}
           >
-            <a 
+            <div 
               onClick={() => props.onSectionClick(section.ref)} 
               style={{ cursor: section.ref ? 'pointer' : 'default', display: 'block', padding: '1px 0' }}
             >
               {section.title}
-            </a>
+            </div>
           </li>
           {section.children && section.children.length > 0 && (
             <div>
@@ -171,7 +171,7 @@ export const PageContent = (props: PageContentProps) => {
   }
   
   const setSectionFromRef = (ref: string) => {
-    if (ref != "") {
+    if (ref !== "") {
       const newSection = getSectionFromRef(ref, props.sections);
       if (newSection) {
         setCurrentSection(newSection);

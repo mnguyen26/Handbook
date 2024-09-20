@@ -1,4 +1,3 @@
-import { TOCnode } from "./Base";
 
 export const BOTTOM_CHILDREN =
 [

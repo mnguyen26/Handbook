@@ -3,7 +3,7 @@
 //========================================================================================================
 
 // React
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 
 // MUI Imports
 import { Box, Button, TextField } from '@mui/material';

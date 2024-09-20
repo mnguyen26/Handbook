@@ -1,4 +1,4 @@
-import { PageContent, Section, PageContentProps } from './Pages/PageTemplate';
+import { PageContent, PageContentProps } from './Pages/PageTemplate';
 import { aboutSections } from './Pages/About';
 import { neutralSections } from './Pages/Neutral';
 import { singleLegSections } from './Pages/SingleLeg';
