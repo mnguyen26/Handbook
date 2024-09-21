@@ -21,7 +21,7 @@ interface QuickNavProps {
 
 export interface PageContentProps {
     sections: Section[];
-    showQuickNav?: boolean;
+    showQuickNav?: boolean; //MMN can probably get rid of this. use count of sections
 }
 
 interface VideoThumbnailProps {
