@@ -33,9 +33,10 @@ export const topClosedGuardSections: Section[] = [
             title: "Standing Up",
             level: 2,
             content: [`Standing up nullifies the vast majority of closed guard attacks and narrows it down to only 
-                a few you need to be aware of. The easiest and most reliable guard breaks are also done standing 
-                up. Always look to stand up in closed guard.`,
-                `Once in the standing position, it can be helpful to slightly point your knees inward into your 
+                a few you need to be aware of. It puts pressure on your opponent's lock and makes it harder for them
+                to keep it closed. Once you're comfortable and stable in this position there are a few very simple
+                guard breaks that you can use to open the guard.`,
+                `When you're in the standing position, it can be helpful to slightly point your knees inward into your 
                 opponent's hips to create a little pressure to make it easier to open the guard. Stand with your
                  feet slightly wider that shoulder width and be able to shift your weight between legs. `],
             video: "19CXjimCrvo?start=94",
