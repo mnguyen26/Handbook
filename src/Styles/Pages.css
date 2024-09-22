@@ -7,7 +7,7 @@
   justify-content: center; /* Center child elements horizontally */
   max-width: 75%;
   width: 75%;
-  height: calc(60vh);
+  height: calc(65vh);
   padding: 2em 3em;
   margin: 1em auto 0;
   overflow-y: auto;
@@ -15,7 +15,16 @@
   font-family: 'Spectral', serif;
   font-size: 16px;
   background-color: #faf9f2;
-  box-shadow: 0 -2px -4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.05); 
+}
+
+.page-sections::-webkit-scrollbar {
+  width: .5em;
+}
+
+.page-sections::-webkit-scrollbar-thumb {
+background-color: #e8e5dc;
+outline: 1px solid #c1beb7;
 }
 
 .page-sections {
@@ -28,6 +37,15 @@
   flex: 1 1 25%;
   overflow-y: auto;
   padding-left: 2vw;
+}
+
+.page-quick-nav::-webkit-scrollbar {
+  width: .5em;
+}
+
+.page-quick-nav::-webkit-scrollbar-thumb {
+background-color: #e8e5dc;
+outline: 1px solid #c1beb7;
 }
 
 .quick-nav {

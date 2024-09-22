@@ -9,7 +9,18 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: .5rem;
+}
+
+.logo-container {
+  flex-grow: 1;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.handbook-logo {
+  width: 7.5vw;
+  min-width: 50px;
 }
 
 .title-container {
@@ -20,26 +31,12 @@
 .handbook-title {
   text-align: right;
   margin: 0;
-  font-size: clamp(12px, 5vw, 64px);
+  font-size: clamp(12px, 3vw, 64px);
   font-family: 'Playfair Display';
   font-weight: 400;
   font-style: normal ;
   color: #000000;
   text-align: left;
-}
-
-.logo-container {
-  flex-grow: 1;
-  text-align: right;
-  /* padding-left: 1rem; */
-  padding-right: 1rem;
-}
-
-.handbook-logo {
-  width: 50%; 
-  max-width: 150px; 
-  min-width: 10px;
-  height: auto;
 }
 
 .toc-box {
