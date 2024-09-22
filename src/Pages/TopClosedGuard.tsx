@@ -50,21 +50,25 @@ export const topClosedGuardSections: Section[] = [
                 {
                     title: "Pushing the Guard Open",
                     level: 3,
-                    content: [``],
+                    content: [`Stand up and push one of your opponent's legs to open the guard.`],
                     video: "19CXjimCrvo?start=135",
                     ref: "topClosedGuardPushOpen",
                 },
                 {
                     title: "Pulling the Guard Open",
                     level: 3,
-                    content: [``],
+                    content: [`Stand up and pull one of your opponent's legs to open the guard.`],
                     video: "19CXjimCrvo?start=187",
                     ref: "topClosedGuardPullOpen",
                 },
                 {
                     title: "Splitting the Guard Open",
                     level: 3,
-                    content: [``],
+                    content: [`This guard break may be necessary if your opponent has a super tight closed guard. It makes
+                         use of your knee as a wedge rather than relying on the strength of you pushing or pulling one of
+                          their legs to open the guard. This guard break is particularly effective if your opponent has 
+                          much longer legs relative to the size of  your body since the space you're trying to fit your 
+                          knee into will be much larger.`],
                     video: "19CXjimCrvo?start=231",
                     ref: "topClosedGuardSplitOpen",
                 },
