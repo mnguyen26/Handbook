@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.2c5345b5.css",
-    "main.js": "/static/js/main.00af940f.js",
-    "static/media/HandbookLogo.jpg": "/static/media/HandbookLogo.8065155ec700ad5d5bec.jpg",
+    "main.css": "/static/css/main.7e836278.css",
+    "main.js": "/static/js/main.74390ebb.js",
+    "static/media/crest.jpg": "/static/media/crest.fd3f178586251869e83d.jpg",
     "index.html": "/index.html",
-    "main.2c5345b5.css.map": "/static/css/main.2c5345b5.css.map",
-    "main.00af940f.js.map": "/static/js/main.00af940f.js.map"
+    "main.7e836278.css.map": "/static/css/main.7e836278.css.map",
+    "main.74390ebb.js.map": "/static/js/main.74390ebb.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c5345b5.css",
-    "static/js/main.00af940f.js"
+    "static/css/main.7e836278.css",
+    "static/js/main.74390ebb.js"
   ]
 }
