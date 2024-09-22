@@ -21,7 +21,6 @@ interface QuickNavProps {
 
 export interface PageContentProps {
     sections: Section[];
-    showQuickNav?: boolean; //MMN can probably get rid of this. use count of sections
 }
 
 interface VideoThumbnailProps {
@@ -150,6 +149,7 @@ const SectionContent = (props: SectionContentProps) => {
 
 export const PageContent = (props: PageContentProps) => {
   const [currentSection, setCurrentSection] = useState<Section>(props.sections[0]);
+  const showQuickNav = props.sections[0].children !== undefined;
 
   useEffect(() => {
     setCurrentSection(props.sections[0]);
@@ -187,14 +187,14 @@ export const PageContent = (props: PageContentProps) => {
         <div className='page-sections'>
             <SectionContent key={currentSection.ref} section={currentSection} />
         </div>
-        {props.showQuickNav && (<hr />)}
-        {props.showQuickNav && (
+        {showQuickNav && <hr />} 
+        {showQuickNav && ( 
           <div className='page-quick-nav'>
             <QuickNav 
                 sections={props.sections} 
                 onSectionClick={setSectionFromRef} 
             />
-        </div>
+          </div>
         )}
     </div>
   );

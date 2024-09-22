@@ -4,13 +4,15 @@ import { neutralSections } from './Pages/Neutral';
 import { singleLegSections } from './Pages/SingleLeg';
 import { underhookSections } from './Pages/Underhook';
 import { topClosedGuardSections } from './Pages/TopClosedGuard'
+import { BottomHalfGuardSections } from './Pages/BottomHalfGuard'
 
 export const ContentMap: { [key: string]: PageContentProps } = {
     'about': { sections: aboutSections },
     'neutral': { sections: neutralSections },
-    'singleleg': { sections: singleLegSections, showQuickNav: true },
-    'underhook': {sections: underhookSections, showQuickNav: true},
-    'topclosedguard': {sections: topClosedGuardSections, showQuickNav: true},
+    'singleleg': { sections: singleLegSections},
+    'underhook': {sections: underhookSections},
+    'topclosedguard': {sections: topClosedGuardSections},
+    'bottomhalfguard': {sections: BottomHalfGuardSections},
 };
 
 export const renderContent = (key: string) => {
@@ -19,7 +21,6 @@ export const renderContent = (key: string) => {
     if (pageContentProps) {
         return <PageContent 
                 sections={pageContentProps.sections} 
-                showQuickNav={pageContentProps.showQuickNav} 
                 />;
     }
     else {
