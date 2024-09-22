@@ -3,7 +3,8 @@
 //========================================================================================================
 
 // React
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // MUI Imports
 import { Box, Button, TextField } from '@mui/material';
@@ -294,8 +295,17 @@ const ContentContainer = (props: ContentContainerProps) => {
 //========================================================================================================
 
 const Handbook = () => {
+    const { pageId: initialPageId } = useParams<{ pageId: string }>();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [pageId, setPageId] = useState('about');
+    const [pageId, setPageId] = useState(initialPageId || 'about');
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (pageId) {
+          navigate(`/${pageId}`);
+        }
+      }, [pageId, navigate]);
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);

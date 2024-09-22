@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import './Styles/Pages.css'
 
 import Handbook from './Handbook';
@@ -5,7 +7,12 @@ import Handbook from './Handbook';
 function App() {
   return (
     <div>
-      <Handbook />
+      <Router>
+        <Routes>
+          <Route path="/:pageId" element={<Handbook />} />
+          <Route path="/" element={<Handbook />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
