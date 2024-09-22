@@ -101,7 +101,8 @@ export const underhookSections: Section[] = [
                 },
                 {
                     title: "Snap Down",
-                    content: [`If your opponent is overtly avoiding upper body engagement by sticking their butt away from you and lowering their head, you can attempt a snap-down and then choose how to attack next from the front headlock.`],
+                    content: [`If your opponent is overtly avoiding upper body engagement by sticking their butt away from you and lowering their head, give them a hard snap. This will either bring them all the way down to the mat where you can enter
+                         the front headlock or it will at least get a reaction out of them to stand more upright. It's important to be able to threaten attacks at varying levels that can compliment eachother in this way. `],
                     ref: "snapDownRef",
                     video: "HR0gmDmtwCI?start=410"
                 },

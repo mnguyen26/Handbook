@@ -32,7 +32,7 @@ import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 
 // Custom imports
 import { TABLEOFCONTENTS_TREEITEMS, TOCnode } from './TreeItems/Base';
-import handbookLogo from './Images/HandbookLogo.jpg'
+import crest from './Images/crest.jpg'
 import {ContentMap, renderContent} from './ContentMap'
 
 import './Styles/Header.css';
@@ -320,11 +320,11 @@ const Handbook = () => {
     return (
         <div id='handbook'>
             <div className="header-container">
+                <div className='logo-container'>
+                    <img src={crest} alt='Handbook Logo' className='handbook-logo'/>
+                </div>
                 <div className="title-container">
                     <h1 className="handbook-title">The Grappler's Handbook</h1>
-                </div>
-                <div className='logo-container'>
-                    <img src={handbookLogo} alt='Handbook Logo' className='handbook-logo'/>
                 </div>
             </div>
             <div className="toc-box">

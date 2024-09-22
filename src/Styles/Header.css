@@ -25,16 +25,19 @@
   font-weight: 400;
   font-style: normal ;
   color: #000000;
+  text-align: left;
 }
 
 .logo-container {
   flex-grow: 1;
-  padding-left: 1rem;
+  text-align: right;
+  /* padding-left: 1rem; */
+  padding-right: 1rem;
 }
 
 .handbook-logo {
   width: 50%; 
-  max-width: 60px; 
+  max-width: 150px; 
   min-width: 10px;
   height: auto;
 }
