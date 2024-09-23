@@ -4,6 +4,8 @@
 
 import React, { useEffect, useState } from 'react';
 
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+
 //========================================================================================================
 // INTERFACES
 //========================================================================================================
@@ -41,6 +43,12 @@ interface VideoThumbnailProps {
 //========================================================================================================
 
 const QuickNav = (props: QuickNavProps) => {
+  const [currentSection, setCurrentSection] = useState<string>(props.sections[0].ref);
+
+  const handleSectionClick = (ref: string) => {
+    setCurrentSection(ref);
+    props.onSectionClick(ref);
+  }
   
   const renderSections = (sections: Section[], depth: number) => {
     const defaultFontSize = 1.4;
@@ -73,9 +81,12 @@ const QuickNav = (props: QuickNavProps) => {
             }}
           >
             <div 
-              onClick={() => props.onSectionClick(section.ref)} 
+              onClick={() => handleSectionClick(section.ref)}
               style={{ cursor: section.ref ? 'pointer' : 'default', display: 'block', padding: '1px 0' }}
             >
+              {currentSection != "" && currentSection == section.ref && (
+                <BookmarkIcon sx={{ fontSize: 11 }}/>
+              )}
               {section.title}
             </div>
           </li>
