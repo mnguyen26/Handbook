@@ -4,8 +4,6 @@
 
 import React, { useEffect, useState } from 'react';
 
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-
 //========================================================================================================
 // INTERFACES
 //========================================================================================================
@@ -82,11 +80,14 @@ const QuickNav = (props: QuickNavProps) => {
           >
             <div 
               onClick={() => handleSectionClick(section.ref)}
-              style={{ cursor: section.ref ? 'pointer' : 'default', display: 'block', padding: '1px 0' }}
+              style={
+                { 
+                  cursor: section.ref ? 'pointer' : 'default', 
+                  display: 'block', 
+                  padding: '1px 0',
+                  fontWeight: (currentSection != "" && currentSection == section.ref) ? 'bold' : 'normal',
+                }}
             >
-              {currentSection != "" && currentSection == section.ref && (
-                <BookmarkIcon sx={{ fontSize: 11 }}/>
-              )}
               {section.title}
             </div>
           </li>
