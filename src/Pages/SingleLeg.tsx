@@ -6,7 +6,7 @@
       title: "Single Leg", 
       level: 1, 
       content: [`The single-leg is one of the most common leg grab techniques used in wrestling and jiujitsu due to its
-         simplicty and effectiveness. This sections over different types of single-legs, setups, as well as a variety 
+         simplicty and effectiveness. These sections cover different types of single-legs, setups, as well as a variety 
          of finishes both from the standing position and on the mat. `],
       ref: "singleIntroRef",
       children: [

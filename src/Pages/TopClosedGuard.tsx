@@ -51,7 +51,17 @@ export const topClosedGuardSections: Section[] = [
                 {
                     title: "Pushing the Guard Open",
                     level: 3,
-                    content: [`Stand up and push one of your opponent's legs to open the guard.`],
+                    content: [`We start this guard break by standing up in the closed guard. The goal is to push on one of the
+                         guard player's legs to open it. Choosing which leg or side doesn't really matter; just figure out 
+                        which side you're more comfortably with. Ideally we would know which leg has the foot on the bottom 
+                        but but there's no way of knowing looking forward. My intuition from experience is that it's usually 
+                        ther left leg which is on your right side but I might be wrong about this. Do a side crunch to the 
+                        opponsite side so that you can straighten your arm. We don't just want to use the strength of our arms 
+                        to open the guard, but to use our weight as well. Straighten your arm, reenforce it with your other arm
+                        , and push the guard open. Once it's open keep pushing it to the ground as you slide your knee through
+                        and over their thigh so that you can staple their leg to the ground with your shin. With your arm on 
+                        the opposite side you can take a scoop grip on the opposite leg or a farside underhook and this should
+                         put you in a good position to pass. `],
                     video: "19CXjimCrvo?start=135",
                     ref: "topClosedGuardPushOpen",
                 },

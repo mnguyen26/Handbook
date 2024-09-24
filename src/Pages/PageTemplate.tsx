@@ -157,15 +157,21 @@ const VideoThumbnail = (props: VideoThumbnailProps) => {
 const SectionContent = (props: SectionContentProps) => {
   return (
     <div className="fade-in">
-      <h1>{props.section.title}</h1>
-      {props.section.video && (
+
+
+      <div>
+        <p style={{float: 'left'}}>
+          {props.section.video && (
         <VideoThumbnail videoId={props.section.video} title={props.section.title}/>
-      )}
-      {props.section.content.map((item, index) => (
+        )}
+        </p>
+        <h1>{props.section.title}</h1>
+        {props.section.content.map((item, index) => (
         <p key={`${props.section.ref}-${index}`}>
           <span style={{ marginLeft: '1em' }}>&nbsp;</span>{item}
         </p>
-      ))}
+        ))}  
+      </div>
       {props.section.component && <props.section.component />} 
     </div>
   )
