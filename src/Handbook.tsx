@@ -295,25 +295,26 @@ const ContentContainer = (props: ContentContainerProps) => {
 //========================================================================================================
 
 const Handbook = () => {
-    const { pageId: initialPageId } = useParams<{ pageId: string }>();
+    const { pageId: urlPageId } = useParams<{ pageId: string }>();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [pageId, setPageId] = useState(initialPageId || 'about');
+    const [pageId, setPageId] = useState(urlPageId || 'about');
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (pageId) {
-          navigate(`/${pageId}`);
+        if (urlPageId && urlPageId !== pageId) {
+            setPageId(urlPageId);
         }
-      }, [pageId, navigate]);
+    }, [urlPageId, pageId]);
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);
     };
 
     const handleSetPageId = (newPageId: string) => {
-        if (newPageId in ContentMap) {
+        if (newPageId in ContentMap && newPageId !== pageId) {
             setPageId(newPageId);
+            navigate(`/${newPageId}`);
         }
     };
 
