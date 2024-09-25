@@ -11,7 +11,7 @@ export const topClosedGuardSections: Section[] = [
          lead based on the judges' criteria, keeping you in their closed guard for as long as possible. It looks just 
          active enough offensively that a referee won't warn them for passivity. This can be an extremely frustrating 
          experience, and you need to know how to reliably get out of it.`,
-        `In general, there aren't any high-percentage submissions if you're inside someone's closed guard, and you 
+        `In general, there aren't any high-percentage submissions if you're inside someone's closed guard and you 
         won't be able to initiate any offense until you open it. For this reason, I highly recommend thinking of 
         closed guard as a position to escape from. Breaking guard is an escape, and if you don't know how to escape, 
         someone can put you there and keep you there.`
@@ -26,7 +26,7 @@ export const topClosedGuardSections: Section[] = [
                  on the fewer things that you should be doing instead of the many more things you shouldn't be doing.
                   Always be working to get to your feet and build your posture. If there is a moment when your 
                 opponent has paused their attack, immediately form a grip/frame and stand up. `],
-            video: "19CXjimCrvo",
+            video: "DQH8HxcZG0k",
             ref: "topClosedGuardRules"
         },
         {
@@ -39,7 +39,7 @@ export const topClosedGuardSections: Section[] = [
                 `When you're in the standing position, it can be helpful to slightly point your knees inward into your 
                 opponent's hips to create a little pressure to make it easier to open the guard. Stand with your
                  feet slightly wider that shoulder width and be able to shift your weight between legs. `],
-            video: "19CXjimCrvo?start=94",
+            video: "DQH8HxcZG0k?start=98",
             ref: "topClosedGuardStandingUp"
         },
         {
@@ -62,14 +62,18 @@ export const topClosedGuardSections: Section[] = [
                         and over their thigh so that you can staple their leg to the ground with your shin. With your arm on 
                         the opposite side you can take a scoop grip on the opposite leg or a farside underhook and this should
                          put you in a good position to pass. `],
-                    video: "19CXjimCrvo?start=135",
+                    video: "DQH8HxcZG0k?start=166",
                     ref: "topClosedGuardPushOpen",
                 },
                 {
                     title: "Pulling the Guard Open",
                     level: 3,
-                    content: [`Stand up and pull one of your opponent's legs to open the guard.`],
-                    video: "19CXjimCrvo?start=187",
+                    content: [`I know this violates the rule of keeping both arms in or both arms out but you really aren't
+                         in danger of a triangle here. The guard player has to get their hips all the way up to the level 
+                        of your shoulders to close a strong lock that's and nearly impossible to do when they're hanging off of 
+                        you. If they open their guard they should fall straight down towards the mat rather than be able
+                         to shoot their hips up at all. `],
+                    video: "DQH8HxcZG0k?start=225",
                     ref: "topClosedGuardPullOpen",
                 },
                 {
@@ -80,7 +84,7 @@ export const topClosedGuardSections: Section[] = [
                           their legs to open the guard. This guard break is particularly effective if your opponent has 
                           much longer legs relative to the size of  your body since the space you're trying to fit your 
                           knee into will be much larger.`],
-                    video: "19CXjimCrvo?start=231",
+                    video: "DQH8HxcZG0k?start=250",
                     ref: "topClosedGuardSplitOpen",
                 },
             ]
@@ -96,20 +100,28 @@ export const topClosedGuardSections: Section[] = [
                 {
                     title: "Lumberjack Sweep",
                     level: 3,
-                    content: [`If your stance is wide enough, it's easy to pummel your leg out when your opponent
+                    content: [`This is the most common reaction when standing up in someone's closed guard. While 
+                        the threat of this sweep discourages a lot of people early on from trying to stand up in 
+                        the closed guard ,if your stance is wide enough, it's easy to pummel your leg out when your opponent
                          attempts the lumberjack sweep. Shift your weight to one leg then circle the other outwards
-                          to free it from their grip. `],
-                    video: "19CXjimCrvo?start=313",
+                          to free it from their grip. If you feel like you haven't yet quite widened your stance 
+                        enough to pummel you foot out, shift your upper body forward a little so you won't be 
+                        standing straight up, and this will buy you a little time to readjust your feet position
+                         because it's more difficult to execute the sweep when the top player is leaning forward. `],
+                    video: "DQH8HxcZG0k?start=337",
                     ref: "topClosedGuardLumberJack",
                 },
                 {
                     title: "Muscle Sweep",
                     level: 3,
-                    content: [`The muscle sweep requires that the guard player move their hips to the outside of your
-                         knee to get sufficient pressure to knock you over. Counteract this by touching your elbow 
-                         to your knee and turn that knee inwards. They will need to open their guard to attempt the
-                         sweep so that work will be done for you.`],
-                    video: "19CXjimCrvo?start=378",
+                    content: [`You will also often see the guard player take a scoop grip behind one of the legs
+                         when the top player stands up. There are number of techniques that can be performed from
+                        this grip including the muscle sweep, the ballerina sweep, and funk rolls. All can be 
+                        nullified by  touching your elbow to your knee and turn that knee inwards. They will need
+                         to open their guard to attempt the sweep so that work will be done for you. A k-guard 
+                        entry is also available to the guard player with this grip. Defending that is another 
+                        topic but as far as sweeps go there really isn't a threat of one when entering k-guard.`],
+                    video: "DQH8HxcZG0k?start=411",
                     ref: "topClosedGuardMuscle",
                 },
             ]
