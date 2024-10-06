@@ -24,7 +24,12 @@ export const BOTTOM_CHILDREN =
         id: 'bottom-scoringpositions',
         label: 'Pins/Scoring Positions',
         children: [
-            
+            {
+                id: 'bottomMount',
+                label: 'Mount',
+                children: [],
+                icons: ['LibraryBooks', 'OndemandVideo']
+            },
         ]
     },
 ]
