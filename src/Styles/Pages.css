@@ -4,7 +4,7 @@
 
 .page-content {
   display: flex;
-  justify-content: center; /* Center child elements horizontally */
+  justify-content: center;
   max-width: 75%;
   width: 75%;
   height: calc(65vh);
@@ -92,9 +92,7 @@ outline: 1px solid #c1beb7;
   position: relative;
   width: 80%; 
   padding-top: 50%;
-  background-color: #252525; /* Added background color */
-  /* height: 0; */
-  /* margin: 0 auto; */
+  background-color: #252525;
   overflow: hidden;
   
 }
