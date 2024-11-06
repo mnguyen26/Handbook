@@ -3,8 +3,10 @@ import { aboutSections } from './Pages/About';
 import { neutralSections } from './Pages/Neutral';
 import { singleLegSections } from './Pages/SingleLeg';
 import { underhookSections } from './Pages/Underhook';
-import { topClosedGuardSections } from './Pages/TopClosedGuard'
-import { BottomHalfGuardSections } from './Pages/BottomHalfGuard'
+import { topClosedGuardSections } from './Pages/TopClosedGuard';
+import { BottomHalfGuardSections } from './Pages/BottomHalfGuard';
+import { bottomMountSections } from './Pages/BottomMount';
+
 
 export const ContentMap: { [key: string]: PageContentProps } = {
     'about': { sections: aboutSections },
@@ -13,6 +15,7 @@ export const ContentMap: { [key: string]: PageContentProps } = {
     'underhook': {sections: underhookSections},
     'topclosedguard': {sections: topClosedGuardSections},
     'bottomhalfguard': {sections: BottomHalfGuardSections},
+    'bottomMount': {sections: bottomMountSections},
 };
 
 export const renderContent = (key: string) => {
