@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 .page-content {
   display: flex;
@@ -12,10 +11,12 @@
   margin: 1em auto 0;
   overflow-y: auto;
   overflow-x: hidden;
-  font-family: 'Spectral', serif;
+  font-family: 'Inter';
+  font-weight: 200;
   font-size: 16px;
   background-color: #faf9f2;
-  box-shadow: 2px 4px rgba(0, 0, 0, 0.05); 
+  box-shadow: 5px 5px 15px 3px rgba(100, 100, 111, 0.1);
+  border-radius: 10px;
 }
 
 .page-sections::-webkit-scrollbar {
@@ -60,7 +61,7 @@ outline: 1px solid #c1beb7;
 }
 
 .quick-nav-item {
-  --custom-font-size: 1.6vw;
+  --custom-font-size: 1.4vw;
 }
 
 .video-thumbnail-container {

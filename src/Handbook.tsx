@@ -107,8 +107,8 @@ const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
 
 const StyledCustomTreeLabelText = styled(Typography)({
     color: 'inherit',
-    fontFamily: 'Spectral' , 
-    fontWeight: 500,
+    fontFamily: 'Inter' , 
+    fontWeight: 200,
 });
 
 const CustomTreeLabel = ({children}: CustomLabelProps) => {
@@ -321,19 +321,20 @@ const Handbook = () => {
     return (
         <div id='handbook'>
             <div className="header-container">
-                <div className='logo-container'>
-                    <img src={crest} alt='Handbook Logo' className='handbook-logo'/>
+                <div className="toc-box">
+                    <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <span style={{ marginLeft: '8px' }}>Table of Contents</span>
                 </div>
                 <div className="title-container">
                     <h1 className="handbook-title">The Grappler's Handbook</h1>
                 </div>
+                <div className='logo-container'>
+                    <img src={crest} alt='Handbook Logo' className='handbook-logo'/>
+                </div>
             </div>
-            <div className="toc-box">
-                <IconButton onClick={toggleDrawer(true)} edge="start" color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
-                <span style={{ marginLeft: '8px' }}>Table of Contents</span>
-            </div>
+            
             <ContentContainer pageId={pageId} />
             <TOCDrawer
                 open={drawerOpen}

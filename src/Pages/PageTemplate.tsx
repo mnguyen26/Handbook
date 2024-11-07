@@ -85,7 +85,7 @@ const QuickNav = (props: QuickNavProps) => {
                   cursor: section.ref ? 'pointer' : 'default', 
                   display: 'block', 
                   padding: '1px 0',
-                  fontWeight: (currentSection != "" && currentSection == section.ref) ? 'bold' : 'normal',
+                  fontWeight: (currentSection != "" && currentSection == section.ref) ? '400' : '100',
                 }}
             >
               {section.title}
@@ -165,7 +165,7 @@ const SectionContent = (props: SectionContentProps) => {
         <VideoThumbnail videoId={props.section.video} title={props.section.title}/>
         )}
         </p>
-        <h1>{props.section.title}</h1>
+        <h3>{props.section.title}</h3>
         {props.section.content.map((item, index) => (
         <p key={`${props.section.ref}-${index}`}>
           <span style={{ marginLeft: '1em' }}>&nbsp;</span>{item}

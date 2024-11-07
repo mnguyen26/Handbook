@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800;900&display=swap');
+
 
 /* MMN Rename this file */
 
@@ -7,40 +7,39 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: .5rem;
+  padding: 2em;
 }
 
 .logo-container {
-  flex-grow: 1;
   text-align: right;
   padding-right: 1rem;
 }
 
 .handbook-logo {
-  width: 7.5vw;
+  width: 5vw;
   min-width: 50px;
 }
 
 .title-container {
   flex-grow: 1;
-
 }
 
 .handbook-title {
-  text-align: right;
+  text-align: center;
   margin: 0;
   font-size: clamp(12px, 3vw, 64px);
-  font-family: 'Playfair Display';
-  font-weight: 400;
-  font-style: normal ;
+  font-family: 'Inter';
+  font-weight: 900;
+  font-style: italic ;
   color: #000000;
-  text-align: left;
 }
 
 .toc-box {
   display: flex;
-  justify-content: center;
   align-items: center;
+  font-family: 'Inter';
+  font-size: .7em;
+  font-weight: 200;
 }

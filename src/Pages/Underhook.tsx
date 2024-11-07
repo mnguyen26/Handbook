@@ -70,13 +70,13 @@ export const underhookSections: Section[] = [
                     ref: "hipThrowSnapRef",
                     video: "HR0gmDmtwCI?start=271"
                 },
-                {
-                    title: "Ouchi Kouchi Knee Tap",
-                    content: [`This knee tap setup makes use of the threat of a couple of trips. You first threaten the inside trip so that your opponent has to move that leg out of the way which commits their weight to the opposite leg. 
-                        You then block that opposite leg with a kouchi gari. In the moment that they are unable to move their leg out of the way, place your hand behind their knee and run your knee tap.`],
-                    ref: "ouchiKouchiRef",
-                    video: "HR0gmDmtwCI?start=316"
-                },
+                // {
+                //     title: "Ouchi Kouchi Knee Tap",
+                //     content: [`This knee tap setup makes use of the threat of a couple of trips. You first threaten the inside trip so that your opponent has to move that leg out of the way which commits their weight to the opposite leg. 
+                //         You then block that opposite leg with a kouchi gari. In the moment that they are unable to move their leg out of the way, place your hand behind their knee and run your knee tap.`],
+                //     ref: "ouchiKouchiRef",
+                //     video: "HR0gmDmtwCI?start=316"
+                // },
                 {
                     title: "Ouchi Sasae Foot Sweep",
                     content: [`This foot sweep is set up using the threat of an inside trip or throw on the same side as the underhook. The goal is to get your opponent to step back very high so that almost all their weight is 
